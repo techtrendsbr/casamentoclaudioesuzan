@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claudio & Suzan | Você é nosso convidado!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        :root { 
+    --gold: #d4a373; 
+    --glass: rgba(255, 255, 255, 0.05); 
+    --glass-border: rgba(255, 255, 255, 0.1); 
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body.scroll-locked {
+    overflow: hidden;
+}
+
+.liquid-navbar {
+    left: 50% !important;
+    right: auto !important;
+    margin: 0 !important;
+    transform: translateX(-50%); 
+    width: max-content !important; 
+}
+
+.glass-card { 
+    background: var(--glass); 
+    border: 1px solid var(--glass-border); 
+    border-radius: 20px; 
+    padding: 40px; 
+    backdrop-filter: blur(10px); 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+}
+
+.btn-main, .btn-secondary { 
+    padding: 15px 30px; 
+    border-radius: 30px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: 0.3s; 
+    border: none; 
+    width: 100%; 
+    font-family: 'Inter', sans-serif; 
+    margin-bottom: 10px; 
+}
+
+.btn-main { background: var(--gold); color: #000; }
+.btn-main:hover { background: #b88a5d; }
+.btn-secondary { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+.btn-secondary:hover { background: rgba(212, 163, 115, 0.1); }
+
+.svg-icon { width: 40px; height: 40px; fill: var(--gold); margin-bottom: 20px; }
+
+.btn-assistir-pedido {
+    background: var(--gold); color: #000; border: none; padding: 12px 20px;
+    border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%;
+    position: relative; z-index: 999; pointer-events: auto; font-size: 1.1rem;
+    margin-top: 12px; font-family: 'Inter', sans-serif;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+.btn-assistir-pedido:hover { transform: scale(1.05); background: #e6b88a; }
+
+.music-btn {
+    position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+    background: var(--gold); color: #000; border: none; border-radius: 50%;
+    width: 50px; height: 50px; display: flex; align-items: center;
+    justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: transform 0.3s;
+}
+
+.static-section { 
+    position: relative; width: 100%; min-height: 100vh; 
+    display: flex; flex-direction: column; align-items: center; justify-content: center; 
+    padding: 100px 20px; box-sizing: border-box; 
+    background-attachment: fixed; background-size: cover; background-position: center; 
+}
+.static-section::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 0; }
+.static-content { position: relative; z-index: 10; width: 100%; max-width: 1200px; display: flex; flex-direction: column; align-items: center; }
+
+#journey { position: relative; background: #000; }
+.journey-bg {
+    position: fixed; inset: 0; height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('couple.webp');
+    background-size: cover; background-position: center; z-index: 0; pointer-events: none;
+}
+.journey-wrapper { position: relative; height: 350vh; z-index: 1; }
+.sticky-wrapper {
+    position: sticky; top: 0; height: 100vh; display: flex;
+    align-items: center; justify-content: center; overflow: hidden;
+}
+
+.stacked-card {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+    width: 240px; background: #fff; padding: 12px 12px 40px 12px; 
+    border-radius: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+    opacity: 0; will-change: transform, opacity;
+}
+.stacked-card img { width: 100%; height: 280px; object-fit: cover; display: block; border-radius: 4px; }
+.card-caption { padding-top: 20px; text-align: center; }
+.card-caption h3 { margin: 0; color: #333; font-family: 'Playfair Display', serif; font-size: 1.1rem; }
+
+#proposal { position: relative; height: 400vh; background-color: #000; }
+.proposal-header { text-align: center; padding-top: 60px; position: relative; z-index: 30; pointer-events: auto; }
+.vector-stage { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; max-width: 1000px; pointer-events: none; z-index: 20;}
+.ring-svg { width: 100%; overflow: visible; }
+
+.check-box {
+    position: absolute; width: 140px; background: #fff; padding: 10px 10px 15px 10px;
+    border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); opacity: 0; 
+    z-index: 50; display: flex; flex-direction: column; align-items: center; text-align: center;
+    transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: auto;
+}
+.check-box img { width: 100%; height: 90px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
+.check-box p { font-family: 'Playfair Display', serif; color: #333; font-size: 0.9rem; margin: 0; font-weight: bold; }
+#check-1 { left: 5%; bottom: 30%; transform: translateX(-50%) translateY(20px); }
+#check-2 { left: 27.5%; top: 25%; transform: translateX(-50%) translateY(-20px); }
+#check-3 { left: 50%; bottom: 30%; transform: translateX(-50%) translateY(20px); }
+#check-4 { left: 72.5%; top: 37%; transform: translateX(-50%) translateY(-20px); }
+#check-5 { left: 95%; bottom: 22%; transform: translateX(-50%) translateY(20px); }
+.check-box.visible { opacity: 1; transform: translateX(-50%) translateY(0) !important; }
+
+#proposal-video-reveal {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000;
+    display: flex; align-items: center; justify-content: center; z-index: 9999;
+    opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
+}
+#proposal-video-reveal.active { opacity: 1; pointer-events: auto; }
+.transition-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; pointer-events: none; }
+.yt-box-container {
+    position: relative; z-index: 10; width: 90%; max-width: 400px; aspect-ratio: 3/4;
+    border-radius: 15px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 2px solid var(--gold);
+    transform: perspective(1000px) rotateX(90deg) scale(0.5); opacity: 0; transform-origin: bottom; transition: all 0.8s ease;
+}
+.yt-box-container.opened { transform: perspective(1000px) rotateX(0deg) scale(1); opacity: 1; }
+.close-video-btn {
+    position: absolute; top: 30px; right: 30px; z-index: 100;
+    background: rgba(255,255,255,0.2); color: #fff; border: 1px solid var(--glass-border);
+    padding: 10px 20px; border-radius: 30px; cursor: pointer; backdrop-filter: blur(5px);
+}
+
+.padrinhos-grid-4 { display: grid; grid-template-columns: 1fr 1.5fr 1.5fr 1fr; gap: 40px; width: 100%; margin-top: 40px; align-items: center; }
+.p-list-col { display: flex; flex-direction: column; gap: 5px; }
+.p-display-img { position: relative; height: 500px; aspect-ratio: 9/16; border-radius: 20px; border: 1px solid var(--glass-border); overflow: hidden; background: #000; }
+.media-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s; }
+.media-active { opacity: 1 !important; z-index: 10; }
+.p-name-item { padding: 15px; cursor: pointer; transition: 0.3s; color: rgba(255,255,255,0.5); font-size: 1.1rem; text-align: center; }
+.p-name-item.selected { color: var(--gold); border-bottom: 1px solid var(--gold); font-weight: 600; }
+
+.venue-split-container { display: grid; grid-template-columns: 6.5fr 3.5fr; gap: 60px; width: 100%; max-width: 1200px; align-items: start; }
+.local-sticky-box { position: sticky; top: 20vh; }
+.timeline-title-main { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 3rem; margin-bottom: 60px; }
+.timeline-list { position: relative; margin-left: 20px; padding-left: 40px; border-left: 2px solid rgba(212, 163, 115, 0.2); display: block !important; }
+.timeline-step { position: relative; min-height: 150px; margin-bottom: 50px; opacity: 0.3; transition: all 0.5s ease; text-align: left; }
+.timeline-step.active { opacity: 1; }
+.timeline-step::before { content: ''; position: absolute; left: -49px; top: 10px; width: 14px; height: 14px; border-radius: 50%; background: #000; border: 2px solid var(--gold); z-index: 2; }
+.timeline-step.active::before { background: var(--gold); box-shadow: 0 0 15px var(--gold); }
+.timeline-icon { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+.timeline-icon img, .timeline-icon svg { width: 45px !important; height: 45px !important; min-width: 45px; object-fit: cover; border-radius: 8px; fill: var(--gold); }
+.timeline-step h3 { margin: 0; font-size: 1.6rem; font-family: 'Playfair Display', serif; color: var(--gold); }
+.timeline-step p { margin: 5px 0 0 0; font-size: 1rem; line-height: 1.5; max-width: 400px; }
+
+.address-link { display: inline-block; color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: 0.3s; }
+.local-photos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.local-photos-grid img { width: 100%; height: 120px; object-fit: cover; border-radius: 12px; border: 2px solid var(--gold); box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.3s; }
+
+.pre-wedding-split { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; width: 100%; max-width: 1200px; margin-top: 40px; align-items: stretch; }
+.qr-container { display: flex; flex-direction: column; align-items: center; background: rgba(0,0,0,0.3); padding: 25px; border-radius: 15px; border: 1px dashed var(--gold); margin-top: 20px; width: 100%; box-sizing: border-box;}
+.qr-container img { width: 150px; height: 150px; border-radius: 10px; margin-bottom: 15px; border: 3px solid #fff; }
+
+.custom-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 10000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.4s; padding: 20px; }
+.custom-modal.active { opacity: 1; pointer-events: auto; }
+.modal-box { background: #111; border: 1px solid var(--gold); border-radius: 20px; width: 100%; max-width: 600px; padding: 30px; position: relative; max-height: 90vh; overflow-y: auto; text-align: left; }
+.close-modal-btn { position: absolute; top: 15px; right: 15px; background: transparent; color: #fff; border: none; font-size: 1.5rem; cursor: pointer; }
+.tab-header { display: flex; border-bottom: 1px solid var(--glass-border); margin-bottom: 20px; }
+.tab-btn { flex: 1; background: none; border: none; color: #fff; padding: 10px; cursor: pointer; opacity: 0.5; transition: 0.3s; }
+.tab-btn.active { opacity: 1; border-bottom: 2px solid var(--gold); color: var(--gold); font-weight: bold;}
+.tab-content { display: none; color: #fff; line-height: 1.6;}
+.tab-content.active { display: block; }
+
+.pw-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 10001; overflow-y: auto; }
+.pw-modal.active { display: block; }
+.pw-modal-content { max-width: 1000px; width: 90%; margin: 80px auto; position: relative; }
+.close-pw-modal { position: fixed; top: 20px; right: 20px; z-index: 10002; background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 30px; color: #fff; cursor: pointer; backdrop-filter: blur(10px); }
+.pw-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+.pw-grid img { width: 100%; height: 300px; object-fit: cover; border-radius: 10px; transition: 0.3s; }
+
+.hotel-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.hotel-item span { color: rgba(255, 255, 255, 0.9); font-family: 'Inter', sans-serif; font-size: 1rem; }
+
+/* Container da Lista */
+.virtual-list-container {
+    max-height: 60vh; /* Altura máxima com scroll interno */
+    overflow-y: auto;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Scrollbar personalizada para manter o estilo */
+.virtual-list-container::-webkit-scrollbar {
+    width: 5px;
+}
+.virtual-list-container::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 10px;
+}
+
+/* Linha do Item */
+.gift-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 120px;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    padding: 12px;
+    border-radius: 15px;
+    transition: 0.3s;
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 100px;
+}
+
+.gift-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--gold);
+}
+
+/* Foto à Esquerda */
+.gift-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--glass-border);
+}
+
+/* Coluna do Meio */
+.gift-info h4 {
+    color: #fff;
+    margin: 0 0 5px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+}
+
+.gift-info p {
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.3;
+}
+
+/* Coluna da Direita */
+.gift-action {
+    text-align: right;
+}
+
+/* Ajuste Mobile */
+@media (max-width: 600px) {
+    .gift-item {
+        grid-template-columns: 70px 1fr;
+        grid-template-rows: auto auto;
+    }
+    .gift-action {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-top: 5px;
+    }
+    .gift-action .btn-secondary {
+        width: 100%;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 900px) {
+    .liquid-navbar { width: 90% !important; overflow-x: auto; justify-content: flex-start; white-space: nowrap; padding: 10px 20px; }
+    #journey .stacked-card { top: 55% !important; width: 240px; height: 340px; padding: 10px 10px 30px 10px !important;}
+    #journey .card-caption { padding-top: 10px; text-align: center; }
+    .vector-stage { width: 100% !important; max-width: none !important; transform: translate(-50%, -50%) scale(0.65) !important; }
+    .check-box { width: 160px !important; padding: 12px !important; border-radius: 8px !important; }
+    .check-box p {
+    font-size: 0.90rem !important;
+    margin-top: 5px !important;
+}
+
+.btn-assistir-pedido {
+    font-size: 0.9rem !important;
+    padding: 8px !important;
+}
+    
+    .padrinhos-grid-4 { 
+        grid-template-columns: 1fr 1fr; 
+        grid-template-areas: 
+            "vid-man vid-woman" 
+            "list-man list-woman"; 
+        gap: 15px; 
+        align-items: start; 
+    }
+    
+    .vid-man { grid-area: vid-man; }
+    .vid-woman { grid-area: vid-woman; }
+    .list-man { grid-area: list-man; }
+    .list-woman { grid-area: list-woman; text-align: center !important; }
+    
+    .p-display-img { height: auto !important; width: 100% !important; aspect-ratio: 9/16; border-radius: 15px; }
+    .p-list-col { height: 140px; overflow-y: scroll; mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%); }
+    .p-name-item { padding: 10px 0; font-size: 0.95rem; opacity: 0.3; border: none !important; }
+    .p-name-item.selected { opacity: 1; transform: scale(1.1); font-weight: bold; }
+    
+    .venue-split-container, .pre-wedding-split { grid-template-columns: 1fr; gap: 30px; }
+    .local-sticky-box { position: relative; top: 0; }
+    .timeline-list { margin-left: 10px; padding-left: 30px; }
+    .timeline-step::before { left: -38px; }
+    .pw-grid, .local-photos-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.static-section, 
+    #hero-static, 
+    #journey .journey-bg {
+        background-attachment: scroll !important;
+    }
+.local-photos-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important; /* Reduzi levemente o espaço para caber melhor em telas pequenas */
+    }
+
+    /* Ajuste na altura para as fotos não ficarem esticadas/achatadas */
+    .local-photos-grid img {
+        height: 80px !important; /* Altura reduzida para mobile */
+    }
+
+@media (max-width: 480px) {
+    .pw-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body class="scroll-locked">
+
+    <div id="preloader">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
+
+    <nav class="liquid-navbar" id="main-nav">
+        <a href="#hero-static" class="nav-item active">Início</a>
+        <a href="#journey" class="nav-item" onclick="scrollToJourneyEnd(event)">História</a>
+        <a href="#proposal" class="nav-item">O Pedido</a>
+        <a href="#padrinhos" class="nav-item">Padrinhos</a>
+        <a href="#venue" class="nav-item">Local</a>
+        <a href="#pre-wedding" class="nav-item">RSVP</a>
+        <a href="#rsvp-gifts" class="nav-item">Presentes</a>
+    </nav>
+
+    <div id="intro-container">
+        <video id="intro-video" muted playsinline preload="auto">
+            <source src="intro.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div id="hero-static" class="hidden" style="background-image: url('couple.webp');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-text-anim">Claudio & Suzan</h1>
+            <p class="hero-date">27.09.2026</p>
+
+            <div class="hero-countdown" id="hero-countdown">
+                <p>Faltam</p><br>
+                <div class="timer-flex">
+                    <div class="t-box"><span id="d">000</span><small>Dias</small></div>
+                    <div class="t-box"><span id="h">00</span><small>Hr</small></div>
+                    <div class="t-box"><span id="m">00</span><small>Min</small></div>
+                    <div class="t-box"><span id="s">00</span><small>Seg</small></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Role para começar</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </div>
+
+    <main id="main-content">
+
+        <section class="scroll-section" id="journey">
+            <div class="journey-bg"></div>
+            <div class="journey-wrapper">
+                <div class="sticky-wrapper">
+                    <div class="journey-content">
+                        <h2 class="section-title">A Jornada</h2>
+                        <p class="section-subtitle">Do início ao "Minha mulher é tão bonita que sei que sou engraçado!" 😍</p>
+                        <div class="photo-stack" id="journey-stack">
+                            <div class="stacked-card" data-card="1"><img src="jornada01.webp" loading="lazy" alt="1"><div class="card-caption"><h3>O Início</h3></div></div>
+                            <div class="stacked-card" data-card="2"><img src="jornada02.webp" loading="lazy" alt="2"><div class="card-caption"><h3>Viagens</h3></div></div>
+                            <div class="stacked-card" data-card="3"><img src="jornada03.webp" loading="lazy" alt="3"><div class="card-caption"><h3>Risadas</h3></div></div>
+                            <div class="stacked-card" data-card="4"><img src="jornada04.webp" loading="lazy" alt="4"><div class="card-caption"><h3>Parceria</h3></div></div>
+                            <div class="stacked-card" data-card="5"><img src="jornada05.webp" loading="lazy" alt="5"><div class="card-caption"><h3>Conquistas</h3></div></div>
+                            <div class="stacked-card" data-card="6"><img src="jornada06.webp" loading="lazy" alt="6"><div class="card-caption"><h3>Lar</h3></div></div>
+                            <div class="stacked-card" data-card="7"><img src="jornada07.webp" loading="lazy" alt="7"><div class="card-caption" id="cards-end"><h3>Família</h3></div></div>
+                        </div>
+                    </div>
+                     <button id="btn-journey-gallery" class="btn-secondary" onclick="openJourneyModal()" style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 50; opacity: 0; transition: opacity 0.5s ease; pointer-events: none; width: auto; padding: 10px 25px; bottom: 11%;">
+                            Ver Galeria de Fotos
+                        </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="scroll-section" id="proposal" style="position: relative; height: 400vh; background-color: #000;">
+            <div class="sticky-wrapper" style="position: sticky; top: 0; width: 100%; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                <img src="pedido001.webp" loading="lazy" class="proposal-bg-layer" id="bg-prop-1" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 1; transition: opacity 0.8s ease; z-index: 1; pointer-events: none;" alt="Fundo 1">
+                <img src="pedido002.webp" loading="lazy" class="proposal-bg-layer" id="bg-prop-2" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; z-index: 1; pointer-events: none;" alt="Fundo 2">
+                <img src="pedido003.webp" loading="lazy" class="proposal-bg-layer" id="bg-prop-3" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; z-index: 1; pointer-events: none;" alt="Fundo 3">
+                <img src="pedido004.webp" loading="lazy" class="proposal-bg-layer" id="bg-prop-4" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; z-index: 1; pointer-events: none;" alt="Fundo 4">
+                <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.6); z-index: 5; pointer-events: none;"></div>
+
+                <div style="position: relative; z-index: 10; width: 100%; height: 100%;">
+                    <div class="proposal-header" style="position: absolute; top: 10%; width: 100%; text-align: center;">
+                        <h2 class="section-title">O Pedido</h2>
+                        <p class="section-subtitle">Sem temer a morte, ele se arriscou. <br>Veja a trama digna do Oscar 👑</p>
+                    </div>
+                    <div class="vector-stage" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; max-width: 1000px;">
+                        <svg viewBox="0 0 1000 300" class="ring-svg" preserveAspectRatio="xMidYMid meet" style="width: 100%; overflow: visible; pointer-events: none;">
+                            <path d="M50,150 Q250,50 500,150 T950,150" stroke="rgba(255, 255, 255, 0.3)" stroke-width="2" fill="none" id="ring-wire" stroke-dasharray="8,8"/>
+                            <circle cx="50" cy="150" r="5" fill="#fff" stroke="#d4a373" stroke-width="2"/>
+                            <circle cx="275" cy="100" r="5" fill="#fff" stroke="#d4a373" stroke-width="2"/>
+                            <circle cx="500" cy="150" r="5" fill="#fff" stroke="#d4a373" stroke-width="2"/>
+                            <circle cx="725" cy="200" r="5" fill="#fff" stroke="#d4a373" stroke-width="2"/>
+                            <circle cx="950" cy="150" r="5" fill="#fff" stroke="#d4a373" stroke-width="2"/>
+                            <g id="rolling-ring">
+                                <circle cx="0" cy="0" r="14" stroke="#d4a373" stroke-width="3" fill="none" />
+                                <circle cx="0" cy="-14" r="4" fill="#fff" filter="drop-shadow(0 0 8px white)"/>
+                            </g>
+                        </svg>
+                        <div class="check-box" id="check-1" style="z-index: 50; pointer-events: auto;"><img src="pedido01.webp" loading="lazy" alt="1"><p>A Trama</p></div>
+                        <div class="check-box" id="check-2" style="z-index: 50; pointer-events: auto;"><img src="pedido02.webp" loading="lazy" alt="2"><p>A Surpresa</p></div>
+                        <div class="check-box" id="check-3" style="z-index: 50; pointer-events: auto;"><img src="pedido03.webp" loading="lazy" alt="3"><p>A Tensão</p></div>
+                        <div class="check-box" id="check-4" style="z-index: 50; pointer-events: auto;"><img src="pedido04.webp" loading="lazy" alt="4"><p>A Busca</p></div>
+                        <div class="check-box" id="check-5" style="z-index: 50; pointer-events: auto;">
+                            <img src="pedido05.webp" loading="lazy" alt="5"><p>O Final Feliz!</p>
+                            <button class="btn-assistir-pedido" onclick="playProposalVideo()">Assistir!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+      <section id="padrinhos" class="static-section" style="background-image: url('couple.webp');">
+            <div class="static-content">
+                <h2 class="section-title">Nossos Padrinhos</h2>
+                <div class="padrinhos-grid-4">
+                    <div class="p-list-col list-man">
+                        <div class="p-name-item selected" onclick="changeMan(0, this)">Pedro</div>
+                        <div class="p-name-item" onclick="changeMan(1, this)">Eduardo</div>
+                        <div class="p-name-item" onclick="changeMan(2, this)">Diego</div>
+                        <div class="p-name-item" onclick="changeMan(3, this)">Gustavo</div>
+                        <div class="p-name-item" onclick="changeMan(4, this)">Bryan</div>
+                        <div class="p-name-item" onclick="changeMan(5, this)">Brenno</div>
+                        <div class="p-name-item" onclick="changeMan(6, this)">Vitor</div>
+                        <div class="p-name-item" onclick="changeMan(7, this)">Rodrigo</div>
+                        <div class="p-name-item" onclick="changeMan(8, this)">Rafael</div>
+                        <div class="p-name-item" onclick="changeMan(9, this)">Ilan</div>
+                        <div class="p-name-item" onclick="changeMan(10, this)">Rômulo</div>
+                        <div class="p-name-item" onclick="changeMan(11, this)">Evandro</div>
+                    </div>
+
+                    <div id="padrinho-display" class="p-display-img vid-man">
+                        <video id="padrinho-video" src="padrinho01.mp4" loop muted playsinline class="media-layer media-active"></video>
+                    </div>
+
+                    <div id="madrinha-display" class="p-display-img vid-woman">
+                        <video id="madrinha-video" src="madrinha01.mp4" loop muted playsinline class="media-layer media-active"></video>
+                    </div>
+
+                    <div class="p-list-col list-woman" style="text-align: right;">
+                        <div class="p-name-item selected" onclick="changeWoman(0, this)">Paula</div>
+                        <div class="p-name-item" onclick="changeWoman(1, this)">Monique</div>
+                        <div class="p-name-item" onclick="changeWoman(2, this)">Nadiesca</div>
+                        <div class="p-name-item" onclick="changeWoman(3, this)">Clarissa</div>
+                        <div class="p-name-item" onclick="changeWoman(4, this)">Bruna</div>
+                        <div class="p-name-item" onclick="changeWoman(5, this)">Juliana</div>
+                        <div class="p-name-item" onclick="changeWoman(6, this)">Natascha</div>
+                        <div class="p-name-item" onclick="changeWoman(7, this)">Francine</div>
+                        <div class="p-name-item" onclick="changeWoman(8, this)">Ana Paula</div>
+                        <div class="p-name-item" onclick="changeWoman(9, this)">Thailine</div>
+                        <div class="p-name-item" onclick="changeWoman(10, this)">Suzamara</div>
+                        <div class="p-name-item" onclick="changeWoman(11, this)">Barbara</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="venue" class="static-section" style="background-image: url('local01.webp');">
+            <div class="static-content">
+                <div class="venue-split-container">
+                    <div class="timeline-wrapper">
+                        <h2 class="timeline-title-main">Cronograma</h2>
+                        <div class="timeline-list">
+                            <div class="timeline-step">
+                                <div class="timeline-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                    <h3>Sexta-feira</h3>
+                                </div>
+                                <p><strong>Comemoração Inicial</strong><br>Despedidas de solteiro em locais isolados: um grupo para os homens e outro para as mulheres.</p>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="timeline-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+                                    <h3>Sábado, 13h</h3>
+                                </div>
+                                <p><strong>Almoço de Celebração</strong><br>Almoço para quem quiser aderir em um restaurante reservado (local a confirmar). A noite de sábado será livre.</p>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="timeline-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    <h3>Domingo, 16h</h3>
+                                </div>
+                                <p><strong>Cerimônia - O momento do "Sim"</strong><br>A cerimônia acontecerá no espaço Paraíso Village, seguida de muita emoção.</p>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="timeline-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M6 13c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0 4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0-8c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-3 .5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM6 5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm15 5.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zM14 7c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0-3.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm-11 10c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm7 7c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm0-17c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM10 7c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0 5.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm8 .5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0 4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zM18 7c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zM5.5 9c-.83 0-1.5.67-1.5 1.5S4.67 12 5.5 12 7 11.33 7 10.5 6.33 9 5.5 9zm13 7c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-8.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM12 14c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0 4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm4-8c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-8 0c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm2-4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"/></svg>
+                                    <h3>Domingo, 19h</h3>
+                                </div>
+                                <p><strong>Jantar e Festa</strong><br>Após a cerimônia, vamos celebrar a vida e o amor com muita música, comida boa e drinks a noite toda!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="local-sticky-box">
+                        <div class="glass-card">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                            <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.2rem; margin-bottom: 15px;">O Local</h2>
+                            <p style="color:#fff; font-family: 'Inter', sans-serif; font-size: 1.2rem; font-weight: 600;">Paraíso Village</p>
+                            <p style="opacity: 0.6; font-size: 0.95rem; margin-bottom: 15px; color:#fff; font-family: 'Inter', sans-serif;">
+                                <a href="https://www.google.com/maps/search/?api=1&query=R.+Tererê,+492+-+Rio+do+Meio,+Camboriú+-+SC,+88340-000" target="_blank" class="address-link">
+                                    R. Tererê, 492 - Rio do Meio, Camboriú - SC, 88340-000
+                                </a>
+                            </p>
+                            <div style="width: 100%; margin-bottom: 30px;">
+                                <div class="local-photos-grid">
+                                    <a href="javascript:void(0)" onclick="openLocalPhotoModal(0)">
+                                        <img src="local01.webp" loading="lazy" alt="A ponte">
+                                    </a>
+                                    <a href="javascript:void(0)" onclick="openLocalPhotoModal(1)">
+                                        <img src="local02.webp" loading="lazy" alt="O Domo de Vidro">
+                                    </a>
+                                    <a href="javascript:void(0)" onclick="openLocalPhotoModal(2)">
+                                        <img src="local03.webp" loading="lazy" alt="O Espaço">
+                                    </a>
+                                </div>
+                            </div>
+                            <button class="btn-secondary" style="font-size: 1rem; padding: 18px;" onclick="openCustomModal('modal-dicas')">Local & Dicas</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pre-wedding" class="static-section" style="background-image: url('couple.webp');">
+            <div class="static-content">
+                <h2 class="section-title" style="margin-bottom: 10px;">Dress Code & Confirmação</h2>
+                <p class="section-subtitle" style="margin-bottom: 40px; color: var(--gold);">Veja as informações abaixo com atenção para celebrar esse momento especial conosco! </p>
+
+                <div class="pre-wedding-split">
+
+                    <div class="glass-card" style="align-items: flex-start; text-align: left;">
+                        <h3 style="color: var(--gold); margin: 0 0 10px 0; font-family: 'Playfair Display', serif; font-size: 1.6rem;">Padrinhos & Madrinhas</h3>
+                        <p style="color: rgba(255,255,255,0.9); margin-bottom: 15px; line-height: 1.6; font-size: 0.95rem;">
+                            <strong>Madrinhas:</strong> Vestido longo na cor <strong>Verde Oliva</strong> (conforme paleta enviada).<br>
+                            <strong>Padrinhos:</strong> Terno cinza claro, colete opcional e <strong>sapato marrom</strong>. 
+                            <span style="display: block; margin-top: 5px; font-style: italic; color: var(--gold);">* A gravata oficial será enviada no seu convite/presente.</span>
+                        </p>
+                    
+                        <hr style="width: 100%; border: 0; border-top: 1px solid var(--glass-border); margin: 20px 0;">
+                    
+                        <h3 style="color: var(--gold); margin: 0 0 15px 0; font-family: 'Playfair Display', serif; font-size: 1.6rem;">Convidados</h3>
+                        <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.7; font-size: 1.05rem;">
+                            <strong>Passeio Completo / Esporte Fino</strong><br>
+                            Recomendamos para as damas vestidos longos ou midi. Para os cavalheiros, terno (com ou sem gravata) será ideal.
+                            <br><br>Pedimos, com carinho, que <strong><u>evitem tons claros (branco/nude) e o verde oliva</u></strong> reservado aos padrinhos.
+                        </p>
+
+                        <div style="margin-bottom: 25px;">
+                            <p style="color: var(--gold); margin: 0 0 15px 0; font-family: 'Playfair Display', serif; font-size: 1.2rem;">Paleta Sugerida (Convidados)</p>
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="width: 35px; height: 35px; border-radius: 50%; background: #000; border: 2px solid var(--gold);"></div>
+                                    <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Preto</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="width: 35px; height: 35px; border-radius: 50%; background: #2c3e50; border: 2px solid var(--gold);"></div>
+                                    <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Azul Escuro</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="width: 35px; height: 35px; border-radius: 50%; background: #8b0000; border: 2px solid var(--gold);"></div>
+                                    <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Vinho</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="width: 35px; height: 35px; border-radius: 50%; background: #4a4a4a; border: 2px solid var(--gold);"></div>
+                                    <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Cinza</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-style: italic; font-size: 1rem; border-top: 1px solid var(--gold); padding-top: 20px;">
+                            A elegância está na simplicidade e no conforto. O mais importante é que vocês se sintam bem para celebrarem conosco este momento inesquecível de amor e união. ❤️
+                        </p>
+                    </div>
+                    
+                    <div class="glass-card" style="align-items: center; text-align: center;">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="var(--gold)"><path d="M4 4h6v6H4zm2 2v2h2V6zm12-2h-6v6h6zm-2 2v2h2V6zM4 14h6v6H4zm2 2v2h2v-2zM15 14h-2v2h2zm2 0h-2v2h2zm-2 2h-2v2h2zm2 0h-2v2h2zm2-4h-2v2h2zm-2 4h-2v2h2zm0 2h-2v2h2zm-4-6h-2v2h2z"/></svg>
+                        <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.2rem; margin-bottom: 15px;">Atenção ⚠️</h2>
+                        <p style="color:#fff; font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; opacity: 0.9;">
+                            Você <u>PRECISA</u> confirmar sua presença <u>até 31/07</u> com nossa cerimonialista! Por favor nos ajude com isso pois é importante para nossa organização.
+                        </p>
+                        <div class="qr-container">
+                            <img src="https://quickchart.io/qr?text=https%3A%2F%2Fwa.me%2F5547999042263%3Ftext%3DConfirmar%2520presen%25C3%25A7a%2520no%2520casamento%2520Claudio%2520e%2520Suzan&dark=000000&light=ffffff&ecLevel=Q&format=svg" loading="lazy" alt="QR Code">
+                            <p style="color: var(--gold); font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; margin: 0;">Aponte a câmera do celular</p>
+                        </div><br>
+                        <p>
+  Ou então <a href="https://wa.me/5547999042263?text=Confirmar%20presen%C3%A7a%20no%20casamento%20Claudio%20e%20Suzan" 
+  target="_blank" style="color: #d4af37;">
+  clique aqui
+  </a>.
+</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section id="rsvp-gifts" class="static-section" style="background-image: url('foto01.webp');">
+    <div class="static-content">
+        <div class="venue-split-container" style="align-items: center;">
+            
+            <div style="padding-right: 20px;">
+                <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 3rem; margin-bottom: 25px; line-height: 1.1;">Nosso propósito é ajudar!</h2>
+                <p style="color:#fff; font-family: 'Inter', sans-serif; font-size: 1.2rem; line-height: 1.6; opacity: 0.9; margin-bottom: 20px;">
+                    Somos muito gratos pela sorte de termos condições incríveis de amor e vida. Agora, vamos construir nosso lar juntos, realizar nossa lua de mel e também dar sequência em projetos sociais, já que ambos gostamos.
+                    Sua presença é o maior presente! Mas, se desejar nos abençoar, eis algumas opções ao lado para tornar tudo realidade.
+                </p>
+
+                <div style="display: flex; gap: 15px; width: 100%;">
+                    <div style="flex: 1; aspect-ratio: 3/2; border-radius: 12px; overflow: hidden; border: 2px solid var(--gold); box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                        <img src="sonho01.webp" loading="lazy" alt="Propósito 1" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="flex: 1; aspect-ratio: 3/2; border-radius: 12px; overflow: hidden; border: 2px solid var(--gold); box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                        <img src="sonho02.webp" loading="lazy" alt="Propósito 2" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="flex: 1; aspect-ratio: 3/2; border-radius: 12px; overflow: hidden; border: 2px solid var(--gold); box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                        <img src="sonho03.webp" loading="lazy" alt="Propósito 3" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card" style="margin-top: 0;">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3s-3 1.34-3 3c0 .35.07.69.18 1H4c-1.11 0-2 .89-2 2v11c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg>
+                <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.2rem; margin-bottom: 10px;">Presentes</h2>
+                <p style="opacity: 0.8; margin-bottom: 30px; color:#fff; font-family: 'Inter', sans-serif;">Contribua com nossos projetos. Qualquer ajuda é bem-vinda!</p>
+                
+                <div style="display: flex; gap: 15px; width: 100%; flex-direction: column;">
+                    <button class="btn-secondary" onclick="openCustomModal('modal-presentes')">Acessar Lista Virtual</button>
+                    <button class="btn-main" onclick="openCustomModal('modal-pix')">Copiar Pix do Casal</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <footer class="footer" id="site-footer" style="position: relative; z-index: 50; padding: 60px 20px 60px 20px; text-align: center; background: #050505; border-top: 1px solid var(--glass-border);">
+        <p style="color: #fff; font-family: 'Inter', sans-serif; margin-bottom: 10px; font-weight: 500;">Aguardamos você lá! ❤️</p>
+        <span style="display: block; margin-top: 5px; font-style: italic; color: var(--gold);">Save The Date: Dia 27.09.2026</span>
+        <p style="color: rgba(255,255,255,0.6); font-family: 'Inter', sans-serif; font-size: 0.85rem; max-width: 500px; margin: 0 auto; line-height: 1.5;">
+             
+        </p>
+    </footer>
+
+    <div id="journey-gallery-modal" class="pw-modal">
+        <span class="close-pw-modal" onclick="closeJourneyModal()">✕ Fechar Galeria</span>
+        <div class="pw-modal-content">
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.2rem; margin-bottom: 30px; text-align: center;">Nossa História em Fotos</h2>
+            
+            <div class="pw-grid">
+                <img src="foto01.webp" loading="lazy" alt="História">
+                <img src="foto02.webp" loading="lazy" alt="História">
+                <img src="foto03.webp" loading="lazy" alt="História">
+                <img src="foto04.webp" loading="lazy" alt="História">
+                <img src="foto05.webp" loading="lazy" alt="História">
+                <img src="foto06.webp" loading="lazy" alt="História">
+                <img src="foto07.webp" loading="lazy" alt="História">
+                <img src="foto08.webp" loading="lazy" alt="História">
+                <img src="foto09.webp" loading="lazy" alt="História">
+            </div>
+        </div>
+    </div>
+
+    <div id="proposal-video-reveal">
+        <button class="close-video-btn" onclick="closeProposalVideo()">✕ Fechar Vídeo</button>
+        <video id="transition-video" class="transition-vid" muted playsinline preload="auto">
+            <source src="frodo.mp4" type="video/mp4"> 
+        </video>
+        <div id="youtube-box" class="yt-box-container">
+            <iframe id="iframe-proposal" allow="fullscreen" allowfullscreen src="https://streamable.com/e/q0v4jc?" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;"></iframe>
+        </div>
+    </div>
+
+    <div id="modal-dicas" class="custom-modal">
+        <div class="modal-box">
+            <button class="close-modal-btn" onclick="closeCustomModal('modal-dicas')">✕</button>
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.8rem; margin-bottom: 20px;">Informações e Dicas da Região</h3>
+            
+            <div class="tab-header">
+                <button class="tab-btn active" onclick="switchTab(event, 'tab-espaco')">O Espaço</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab-turismo')">Turismo</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab-hoteis')">Hotéis</button>
+            </div>
+
+            <div id="tab-espaco" class="tab-content active">
+                <p style="color: var(--gold); font-weight: bold; margin-bottom: 15px; font-size: 1.2rem;">Por que escolhemos este local?</p>
+
+                <p style="margin-bottom: 20px; line-height: 1.7; color: rgba(255,255,255,0.9);">
+                    O Paraíso Village não é apenas um local bonito. Ele representa nossa história de amor e os caminhos que nos trouxeram até aqui. Cada detalhe deste espaço carrega significados especiais para nós.
+                </p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid var(--gold);">
+                        <img src="local01.webp" loading="lazy" alt="A Ponte" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; border: 2px solid var(--gold);">
+                        <h4 style="color: var(--gold); margin: 0 0 10px 0; font-family: 'Playfair Display', serif; font-size: 1.3rem;">A Ponte</h4>
+                        <p style="color: rgba(255,255,255,0.85); margin: 0; font-size: 0.95rem; line-height: 1.6;">
+                            Construída com ferro da antiga Ponte Hercílio Luz de Florianópolis. Esta ponte têm o simbolismo de ter sido a escolha de onde os dois morarão ao casar.
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid var(--gold);">
+                        <img src="local04.webp" loading="lazy" alt="O Poço" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; border: 2px solid var(--gold);">
+                        <h4 style="color: var(--gold); margin: 0 0 10px 0; font-family: 'Playfair Display', serif; font-size: 1.3rem;">O Poço</h4>
+                        <p style="color: rgba(255,255,255,0.85); margin: 0; font-size: 0.95rem; line-height: 1.6;">
+                            Que simboliza a jornada da Suzan. Este lugar é algo muito representativo para ela, carregando memórias especiais e significados profundos da sua jornada.
+                        </p>
+                    </div>
+                </div>
+
+                <p style="line-height: 1.7; font-style: italic; color: rgba(255,255,255,0.8); text-align: center;">
+                    Estamos muito felizes em compartilhar este momento especial em um lugar que representa tanto para nós.
+                </p>
+            </div>
+            <div id="tab-turismo" class="tab-content">
+    <p style="color: var(--gold); font-weight: bold; margin-bottom: 15px; font-size: 1.2rem;">O que fazer em Camboriú e Região?</p>
+
+    <div style="margin-bottom: 25px;">
+        <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+            <img src="turismo01.webp" loading="lazy" style="width: 100px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold); flex-shrink: 0;">
+            <div>
+                <h4 style="color: #fff; margin: 0 0 4px 0; font-family: 'Playfair Display', serif;">Praia Central</h4>
+                <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; line-height: 1.4;">Ótimo para caminhadas e para conhecer o visual dos arranha-céus. O calçadão à noite ganha vida com iluminação especial.</p>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+            <img src="turismo02.webp" loading="lazy" style="width: 100px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold); flex-shrink: 0;">
+            <div>
+                <h4 style="color: #fff; margin: 0 0 4px 0; font-family: 'Playfair Display', serif;">Roda Gigante FG Big Wheel</h4>
+                <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; line-height: 1.4;">Passeio a 80 metros de altura com vista de 360 graus da cidade e do mar.</p>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+            <img src="turismo03.webp" loading="lazy" style="width: 100px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold); flex-shrink: 0;">
+            <div>
+                <h4 style="color: #fff; margin: 0 0 4px 0; font-family: 'Playfair Display', serif;">Beto Carrero World</h4>
+                <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; line-height: 1.4;">Mais famoso parque de diversões do Brasil, fica na cidade de Penha, a 20min de Balneário.</p>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+            <img src="turismo04.webp" loading="lazy" style="width: 100px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold); flex-shrink: 0;">
+            <div>
+                <h4 style="color: #fff; margin: 0 0 4px 0; font-family: 'Playfair Display', serif;">Pier de Itapema</h4>
+                <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; line-height: 1.4;">Atração nova na cidade vizinha de BC, tem um pier magnífico com um Hard Rock Cafe no meio do mar</p>
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+            <img src="turismo05.webp" loading="lazy" style="width: 100px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold); flex-shrink: 0;">
+            <div>
+                <h4 style="color: #fff; margin: 0 0 4px 0; font-family: 'Playfair Display', serif;">Oceanic Aquarium</h4>
+                <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; line-height: 1.4;">Um dos aquários mais conhecidos do país, é ótimo passeio para família.</p>
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+            <img src="turismo06.webp" loading="lazy" style="width: 100px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold); flex-shrink: 0;">
+            <div>
+                <h4 style="color: #fff; margin: 0 0 4px 0; font-family: 'Playfair Display', serif;">Teleférico</h4>
+                <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; line-height: 1.4;">Passeio que  conecta praias da região com uma vista panorâmica deslumbrante.</p>
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+            <img src="turismo07.webp" loading="lazy" style="width: 100px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold); flex-shrink: 0;">
+            <div>
+                <h4 style="color: #fff; margin: 0 0 4px 0; font-family: 'Playfair Display', serif;">Space Adventure</h4>
+                <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; line-height: 1.4;">Uma atração diferente que permite conhecer detalhes da exploração espacial.</p>
+            </div>
+        </div>
+    </div>
+</div>
+            <div id="tab-hoteis" class="tab-content">
+    <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px; font-size: 0.9rem;">
+        O local do casamento fica cerca de 20min de Balneário Camboriú. Recomendamos a cidade pela variedade de serviços. Deixamos abaixo algumas opções de hotéis, e caso queiram algo mais personalizado ou airBnB você pode falar com a Bruna (uma das madrinhas!) <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">
+    Caso queiram algo mais personalizado, você pode falar com a Bruna, ela gerencia hospedagens na região e está com desconto em reservas para o casamento: 
+    <a href="https://wa.link/247rg1" target="_blank" style="color: #d4a373; text-decoration: underline; font-weight: 500;">clicando aqui</a>
+</p>
+    </p>
+<br>
+    <h4 style="color: #fff; margin: 20px 0 10px 0; font-family: 'Playfair Display', serif;">🏖️ Balneário Camboriú</h4>
+    <div class="hotel-item">
+        <span>Slaviero Brut Balneário</span>
+        <a href="https://www.booking.com/hotel/br/slaviero-conceptual-brut.pt-br.html" target="_blank" class="btn-secondary" style="width: auto; padding: 8px 15px; margin: 0; text-decoration: none; font-size: 0.9rem;">Reservar</a>
+    </div>
+    <div class="hotel-item">
+        <span>Hotel D'Sintra</span>
+        <a href="https://www.booking.com/hotel/br/d-sintra-ltda.pt-br.html" target="_blank" class="btn-secondary" style="width: auto; padding: 8px 15px; margin: 0; text-decoration: none; font-size: 0.9rem;">Reservar</a>
+    </div>
+    <div class="hotel-item">
+        <span>Marambaia Hotel & Convenções</span>
+        <a href="https://www.booking.com/hotel/br/marambaia-cassino-convencoes.pt-br.html" target="_blank" class="btn-secondary" style="width: auto; padding: 8px 15px; margin: 0; text-decoration: none; font-size: 0.9rem;">Reservar</a>
+    </div>
+    <div class="hotel-item">
+        <span>Sibara SPA & Convenções</span>
+        <a href="https://www.booking.com/hotel/br/sibara-flat-convencoes.pt-br.html" target="_blank" class="btn-secondary" style="width: auto; padding: 8px 15px; margin: 0; text-decoration: none; font-size: 0.9rem;">Reservar</a>
+    </div>
+    <div class="hotel-item">
+        <span>Ibis BC</span>
+        <a href="https://www.booking.com/hotel/br/ibis-plaza-balneario-camboriu.pt-br.html" target="_blank" class="btn-secondary" style="width: auto; padding: 8px 15px; margin: 0; text-decoration: none; font-size: 0.9rem;">Reservar</a>
+    </div>
+
+    <h4 style="color: #fff; margin: 25px 0 10px 0; font-family: 'Playfair Display', serif;">🏙️ Camboriú</h4>
+    <div class="hotel-item">
+        <span>Hotel Arco do Sol</span>
+        <a href="https://www.booking.com/hotel/br/arco-do-sol-park.pt-br.html" target="_blank" class="btn-secondary" style="width: auto; padding: 8px 15px; margin: 0; text-decoration: none; font-size: 0.9rem;">Reservar</a>
+    </div>
+
+    <h4 style="color: #fff; margin: 25px 0 10px 0; font-family: 'Playfair Display', serif;">💰 Econômico</h4>
+    <div class="hotel-item">
+        <span>Bouganville Guest House</span>
+        <a href="https://www.booking.com/hotel/br/bouganville-house-bc.pt-br.html" target="_blank" class="btn-secondary" style="width: auto; padding: 8px 15px; margin: 0; text-decoration: none; font-size: 0.9rem;">Reservar</a>
+    </div>
+    <div class="hotel-item">
+        <span>Pousada Al Mare</span>
+        <a href="https://www.booking.com/hotel/br/pousada-al-mare.pt-br.html" target="_blank" class="btn-secondary" style="width: auto; padding: 8px 15px; margin: 0; text-decoration: none; font-size: 0.9rem;">Reservar</a>
+    </div>
+</div> </div> </div> <div id="modal-presentes" class="custom-modal">
+    <div class="modal-box">
+        <button class="close-modal-btn" onclick="closeCustomModal('modal-presentes')">✕</button>
+        <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.8rem; margin-bottom: 10px; text-align: center;">Lista de Presentes Virtuais</h3>
+<p style="color: rgba(255,255,255,0.7); text-align: center; margin-bottom: 25px; font-size: 0.9rem;">Sua presença é nosso maior presente, mas se desejar contribuir com nossa jornada, escolha um item abaixo.</p>
+
+<div class="virtual-list-container">
+    <div class="gift-item">
+        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=200&q=80');"></div>
+        <div class="gift-info">
+            <h4>Jantar Romântico na Lua de Mel</h4>
+            <p>Uma noite especial para os noivos comemorarem em Veneza.</p>
+        </div>
+        <div class="gift-action">
+            <button class="btn-secondary" onclick="alert('Item selecionado!')">Escolher</button>
+        </div>
+    </div>
+
+    <div class="gift-item">
+        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1520174691701-bc555a3404ca?w=200&q=80');"></div>
+        <div class="gift-info">
+            <h4>Passeio de Gôndola</h4>
+            <p>O clássico tour pelos canais italianos.</p>
+        </div>
+        <div class="gift-action">
+            <button class="btn-secondary">Escolher</button>
+        </div>
+    </div>
+
+    <div class="gift-item">
+        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1511112536034-722108783456?w=200&q=80');"></div>
+        <div class="gift-info">
+            <h4>Café da Manhã no Quarto</h4>
+            <p>Um mimo especial para o primeiro dia de casados.</p>
+        </div>
+        <div class="gift-action">
+            <button class="btn-secondary">Escolher</button>
+        </div>
+    </div>
+
+    <div class="gift-item">
+        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=80');"></div>
+        <div class="gift-info">
+            <h4>Hospedagem em Hotel Boutique</h4>
+            <p>Cota para uma diária em um hotel histórico.</p>
+        </div>
+        <div class="gift-action">
+            <button class="btn-secondary">Escolher</button>
+        </div>
+    </div>
+    
+    <div class="gift-item">
+        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=80');"></div>
+        <div class="gift-info">
+            <h4>Hospedagem em Hotel Boutique</h4>
+            <p>Cota para uma diária em um hotel histórico.</p>
+        </div>
+        <div class="gift-action">
+            <button class="btn-secondary">Escolher</button>
+        </div>
+    </div>
+    
+    <div class="gift-item">
+        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=80');"></div>
+        <div class="gift-info">
+            <h4>Hospedagem em Hotel Boutique</h4>
+            <p>Cota para uma diária em um hotel histórico.</p>
+        </div>
+        <div class="gift-action">
+            <button class="btn-secondary">Escolher</button>
+        </div>
+    </div>
+    
+    <div class="gift-item">
+        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=80');"></div>
+        <div class="gift-info">
+            <h4>Hospedagem em Hotel Boutique</h4>
+            <p>Cota para uma diária em um hotel histórico.</p>
+        </div>
+        <div class="gift-action">
+            <button class="btn-secondary">Escolher</button>
+        </div>
+    </div>
+    
+    <div class="gift-item">
+        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=80');"></div>
+        <div class="gift-info">
+            <h4>Hospedagem em Hotel Boutique</h4>
+            <p>Cota para uma diária em um hotel histórico.</p>
+        </div>
+        <div class="gift-action">
+            <button class="btn-secondary">Escolher</button>
+        </div>
+    </div>
+    
+    <div class="gift-item">
+        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=80');"></div>
+        <div class="gift-info">
+            <h4>Hospedagem em Hotel Boutique</h4>
+            <p>Cota para uma diária em um hotel histórico.</p>
+        </div>
+        <div class="gift-action">
+            <button class="btn-secondary">Escolher</button>
+        </div>
+    </div>
+    
+    </div>
+        </div>
+</div>
+
+<div id="modal-pix" class="custom-modal">
+    <div class="modal-box" style="text-align: center;">
+        <button class="close-modal-btn" onclick="closeCustomModal('modal-pix')">✕</button>
+        <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.8rem; margin-bottom: 15px;">Nosso Pix</h3>
+        <p style="color: #fff; font-family: 'Inter', sans-serif; margin-bottom: 20px;">Escaneie o QR Code ou copie a chave abaixo.</p>
+        
+        <img src="https://res.cloudinary.com/dabmzfood/image/upload/v1776763264/pix-claudioesuzan_pvldkt.webp" loading="lazy" alt="QR Code Pix" style="border-radius: 10px; border: 2px solid var(--gold); margin-bottom: 20px; width: 150px;">
+        
+        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-family: monospace; font-size: 1.1rem; border: 1px dashed var(--glass-border); color: #fff;">chave: +5521981038503</div>
+        <button class="btn-main" onclick="copiarPixChave()">Copiar Chave Pix</button>
+    </div>
+</div>
+
+    <audio id="wedding-music" loop preload="auto">
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-toggle" class="music-btn">
+        <svg id="icon-unmuted" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" style="display: none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <svg id="icon-muted" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+    </button>
+
+<script>
+    let videoStarted = false;
+    let isPlaying = false;
+    let musicWasPlaying = false;
+    let musicStarted = false; 
+    const weddingDate = new Date('2026-09-27T19:30:00').getTime();
+
+    // 1. SINCRONIZAÇÃO PRELOADER + VIDEO INTRO
+    window.addEventListener('load', () => {
+        const preloader = document.getElementById('preloader');
+        const video = document.getElementById('intro-video');
+        const hero = document.getElementById('hero-static');
+        const vMan = document.getElementById('padrinho-video');
+        const vWoman = document.getElementById('madrinha-video');
+
+        window.scrollTo(0, 0);
+
+        if (video) {
+            video.load();
+
+            // O preloader só sai quando o vídeo realmente der o play
+            video.addEventListener('playing', () => {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 300);
+            });
+
+            video.play().catch(() => {
+                video.muted = true;
+                video.play();
+            });
+
+            video.onended = () => {
+                video.style.opacity = 0;
+                setTimeout(() => {
+                    document.getElementById('intro-container').style.display = 'none';
+                    hero.classList.remove('hidden');
+                    document.body.classList.remove('scroll-locked');
+                    
+                    // ATIVA OS GATILHOS DE MÚSICA (Scroll ou Toque)
+                    // Adicionamos listeners globais que ficarão monitorando o primeiro movimento
+                    ['scroll', 'click', 'touchstart', 'wheel'].forEach(evt => {
+                        window.addEventListener(evt, attemptPlayMusic, { passive: true });
+                    });
+                }, 800);
+            };
+        }
+
+        if (vMan) vMan.play().catch(() => {});
+        if (vWoman) vWoman.play().catch(() => {});
+    });
+
+    // 2. GATILHO DE MÚSICA (PÓS-INTRO) - CORRIGIDO PARA O PRIMEIRO SCROLL
+    function attemptPlayMusic() {
+        if (musicStarted) return;
+
+        const musicElement = document.getElementById('wedding-music');
+
+        // Tenta tocar a música diretamente quando houver qualquer interação
+        if (musicElement) {
+            musicElement.play().then(() => {
+                musicStarted = true;
+                isPlaying = true;
+                updateIcon(true);
+                // Remove os ouvintes para não executar novamente
+                ['scroll', 'click', 'touchstart', 'wheel'].forEach(evt => {
+                    window.removeEventListener(evt, attemptPlayMusic);
+                });
+                console.log("Música iniciada pelo primeiro scroll/interação.");
+            }).catch(err => {
+                // Caso o navegador ainda bloqueie, ele tentará na próxima interação
+                console.log("Aguardando interação válida para áudio...");
+            });
+        }
+    }
+
+    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+    window.addEventListener('beforeunload', () => { window.scrollTo(0, 0); });
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+        if (document.getElementById('d') && distance > 0) {
+            document.getElementById('d').textContent = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(3, '0');
+            document.getElementById('h').textContent = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById('m').textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById('s').textContent = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function changeMan(idx, el) {
+        const vid = document.getElementById('padrinho-video');
+        const fileNum = (idx + 1).toString().padStart(2, '0');
+        vid.src = `padrinho${fileNum}.mp4`;
+        vid.play().catch(() => {});
+        if (el) {
+            el.parentElement.querySelectorAll('.p-name-item').forEach(i => i.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+    }
+
+    function changeWoman(idx, el) {
+        const vid = document.getElementById('madrinha-video');
+        const fileNum = (idx + 1).toString().padStart(2, '0');
+        vid.src = `madrinha${fileNum}.mp4`;
+        vid.play().catch(() => {});
+        if (el) {
+            el.parentElement.querySelectorAll('.p-name-item').forEach(i => i.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+    }
+
+    function playProposalVideo() {
+        const videoSec = document.getElementById('proposal-video-reveal');
+        const transVid = document.getElementById('transition-video');
+        const ytBox = document.getElementById('youtube-box');
+
+        if (isPlaying) {
+            musicWasPlaying = true;
+            toggleMusic(false);
+        } else {
+            musicWasPlaying = false;
+        }
+
+        videoSec.classList.add('active');
+        transVid.currentTime = 0;
+        transVid.play().catch(() => {});
+        transVid.onended = () => { ytBox.classList.add('opened'); };
+        setTimeout(() => { if (!ytBox.classList.contains('opened')) ytBox.classList.add('opened'); }, 3500);
+    }
+
+    function closeProposalVideo() {
+        const videoSec = document.getElementById('proposal-video-reveal');
+        const transVid = document.getElementById('transition-video');
+        const ytBox = document.getElementById('youtube-box');
+        const iframe = document.getElementById('iframe-proposal');
+        const currentSrc = iframe.src;
+
+        iframe.src = "";
+        iframe.src = currentSrc;
+        ytBox.classList.remove('opened');
+        transVid.pause();
+        transVid.currentTime = 0;
+
+        setTimeout(() => {
+            videoSec.classList.remove('active');
+            if (musicWasPlaying) toggleMusic(true);
+        }, 500);
+    }
+
+    function openLocalPhotoModal(index) {
+        const photos = ['local01.webp', 'local02.webp', 'local03.webp'];
+        const modal = document.createElement('div');
+        modal.id = "fullscreen-photo-modal";
+        modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.95); z-index: 10000; display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;';
+        modal.innerHTML = `
+            <button type="button" id="btn-close-photo" style="position: absolute; top: 30px; right: 30px; color: #fff; font-size: 2rem; background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 30px; border: 1px solid var(--glass-border); cursor: pointer; backdrop-filter: blur(5px);">✕</button>
+            <img src="${photos[index]}" alt="Foto do Local" style="max-width: 90%; max-height: 90%; border-radius: 12px; border: 2px solid var(--gold); box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+        `;
+        document.body.appendChild(modal);
+
+        const closeHandler = () => {
+            modal.style.opacity = '0';
+            setTimeout(() => { modal.remove(); }, 300);
+        };
+
+        modal.querySelector('#btn-close-photo').addEventListener('click', closeHandler);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeHandler(); });
+        setTimeout(() => modal.style.opacity = '1', 10);
+    }
+
+    function openCustomModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.add('active');
+            document.body.classList.add('scroll-locked');
+        }
+    }
+
+    function closeCustomModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.classList.remove('scroll-locked');
+        }
+    }
+
+    function switchTab(evt, tabId) {
+        let modalBox = evt.target.closest('.modal-box');
+        modalBox.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        modalBox.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        evt.currentTarget.classList.add('active');
+    }
+
+    function copiarPixChave() {
+        const chave = "+5521981038503";
+        navigator.clipboard.writeText(chave).then(() => { alert("Chave Pix copiada com sucesso!"); }).catch(() => {});
+    }
+
+    function scrollToJourneyEnd(e) {
+        if (e) e.preventDefault();
+        const el = document.getElementById('journey');
+        if (el) {
+            const targetY = el.offsetTop + el.offsetHeight - window.innerHeight;
+            window.scrollTo({ top: targetY, behavior: 'smooth' });
+        }
+    }
+
+    function openJourneyModal() {
+        document.getElementById('journey-gallery-modal').classList.add('active');
+        document.body.classList.add('scroll-locked');
+    }
+
+    function closeJourneyModal() {
+        const currentScroll = window.scrollY;
+        document.getElementById('journey-gallery-modal').classList.remove('active');
+        document.body.classList.remove('scroll-locked');
+        window.scrollTo(0, currentScroll);
+    }
+
+    const music = document.getElementById('wedding-music');
+    const musicBtn = document.getElementById('music-toggle');
+    const iconMuted = document.getElementById('icon-muted');
+    const iconUnmuted = document.getElementById('icon-unmuted');
+
+    function toggleMusic(forceState) {
+        const nextState = (typeof forceState === 'boolean') ? forceState : !isPlaying;
+        if (nextState) {
+            music.play().then(() => {
+                isPlaying = true;
+                updateIcon(true);
+                musicStarted = true; // Marca como iniciado se o user clicou no botão antes do scroll
+            }).catch(() => {
+                isPlaying = false;
+                updateIcon(false);
+            });
+        } else {
+            music.pause();
+            updateIcon(false);
+            isPlaying = false;
+        }
+    }
+
+    function updateIcon(playing) {
+        if (playing) {
+            iconMuted.style.display = 'none';
+            iconUnmuted.style.display = 'block';
+        } else {
+            iconMuted.style.display = 'block';
+            iconUnmuted.style.display = 'none';
+        }
+    }
+
+    musicBtn.addEventListener('click', () => toggleMusic());
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    window.addEventListener('resize', handleScroll);
+
+    function handleScroll() {
+        if (document.body.classList.contains('scroll-locked')) return;
+        const scrollY = window.scrollY;
+        const h = window.innerHeight;
+        const isDesktop = window.innerWidth >= 1024;
+
+        const getProgress = (id) => {
+            const el = document.getElementById(id);
+            if (!el) return 0;
+            return Math.min(Math.max((scrollY - el.offsetTop) / (el.offsetHeight - h), 0), 1);
+        };
+
+        const navbar = document.getElementById('main-nav');
+        const footer = document.getElementById('site-footer');
+        if (navbar && footer) {
+            const footerTop = footer.getBoundingClientRect().top;
+            if (footerTop < h) {
+                navbar.style.transform = `translate(-50%, -${h - footerTop}px)`;
+            } else {
+                navbar.style.transform = `translate(-50%, 0)`;
+            }
+        }
+
+        const pJourney = getProgress('journey');
+        const cards = document.querySelectorAll('.stacked-card');
+        cards.forEach((card, i) => {
+            const step = 0.6 / cards.length;
+            const cardStart = i * step;
+            const cardEnd = cardStart + 0.3;
+            let prog = Math.min(Math.max((pJourney - cardStart) / (cardEnd - cardStart), 0), 1);
+            const spreadX = (i - (cards.length - 1) / 2) * (isDesktop ? 110 : 35);
+            const rotation = (i % 2 === 0 ? -8 : 8) * prog;
+            const currentY = (1 - prog) * (isDesktop ? 100 : 80);
+            const scale = isDesktop ? 1 : 0.85;
+            card.style.opacity = prog;
+            card.style.transform = `translate3d(calc(-50% + ${spreadX * prog}px), calc(-50% + ${currentY}px), 0) rotate(${rotation}deg) scale(${scale})`;
+        });
+
+        const journeyBtn = document.getElementById('btn-journey-gallery');
+        if (journeyBtn) {
+            journeyBtn.style.opacity = pJourney > 0.8 ? '1' : '0';
+            journeyBtn.style.pointerEvents = pJourney > 0.8 ? 'auto' : 'none';
+        }
+
+        const pProp = getProgress('proposal');
+        if (pProp >= 0 && pProp <= 1) {
+            const ringPath = document.getElementById('ring-wire');
+            const ring = document.getElementById('rolling-ring');
+            if (ringPath && ring) {
+                const len = ringPath.getTotalLength();
+                const pt = ringPath.getPointAtLength(pProp * len);
+                ring.setAttribute('transform', `translate(${pt.x}, ${pt.y}) rotate(${pProp * 1080})`);
+            }
+            const checkpoints = [
+                { id: 'check-1', t: 0.05, bg: 'bg-prop-1' },
+                { id: 'check-2', t: 0.25, bg: 'bg-prop-2' },
+                { id: 'check-3', t: 0.50, bg: 'bg-prop-3' },
+                { id: 'check-4', t: 0.72, bg: 'bg-prop-4' },
+                { id: 'check-5', t: 0.90, bg: 'bg-prop-4' }
+            ];
+            let activeBgId = 'bg-prop-1';
+            checkpoints.forEach(cp => {
+                const el = document.getElementById(cp.id);
+                if (el) {
+                    if (pProp > cp.t) { el.classList.add('visible'); activeBgId = cp.bg; }
+                    else { el.classList.remove('visible'); }
+                }
+            });
+            document.querySelectorAll('.proposal-bg-layer').forEach(layer => {
+                layer.style.opacity = layer.id === activeBgId ? '1' : '0';
+                layer.style.zIndex = layer.id === activeBgId ? '2' : '1';
+            });
+        }
+
+        const videoModal = document.getElementById('proposal-video-reveal');
+        if (videoModal && videoModal.classList.contains('active') && (pProp < 0.85 || pProp >= 1.0)) {
+            closeProposalVideo();
+        }
+
+        const triggerBottom = h * 0.6;
+        document.querySelectorAll('.timeline-step').forEach(step => {
+            const rect = step.getBoundingClientRect();
+            if (rect.top < triggerBottom && rect.bottom > (h * 0.2)) { step.classList.add('active'); }
+            else { step.classList.remove('active'); }
+        });
+    }
+</script>
+</body>
+</html>
