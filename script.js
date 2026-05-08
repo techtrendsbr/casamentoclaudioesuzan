@@ -108,3 +108,12 @@ function expandImage(img) {
     document.getElementById('lightbox').classList.add('active'); 
 }
 function closeVideo() { document.getElementById('proposal-video-container').classList.remove('active'); }
+
+function copiarPixChave() {
+    const chave = "claudioesuzan@email.com";
+    navigator.clipboard.writeText(chave).then(() => {
+        alert("Chave Pix copiada com sucesso!");
+    }).catch(err => {
+        console.error('Erro ao copiar: ', err);
+    });
+}
