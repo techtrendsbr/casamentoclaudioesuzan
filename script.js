@@ -4,16 +4,54 @@ window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
     const hero = document.getElementById('hero-static');
     const introContainer = document.getElementById('intro-container');
+    
+    // Variável para garantir que unlock seja chamado apenas uma vez
+    let unlocked = false;
 
     function startSite() {
         preloader.style.opacity = '0';
         setTimeout(() => { 
             preloader.style.display = 'none';
-            video.play().catch(() => unlock()); // Tenta autoplay
+            
+            // Garante que o vídeo está pronto antes de tentar reproduzir
+            if (video.readyState >= 2) {
+                playVideo();
+            } else {
+                video.addEventListener('loadeddata', playVideo, { once: true });
+            }
+            
+            // Timeout de segurança caso o vídeo não carregue
+            setTimeout(() => {
+                if (!unlocked) {
+                    console.log('Vídeo não carregou a tempo, desbloqueando site...');
+                    unlock();
+                }
+            }, 5000);
         }, 500);
     }
 
+    function playVideo() {
+        if (unlocked) return;
+        
+        const playPromise = video.play();
+        
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    console.log('Vídeo iniciado com sucesso');
+                })
+                .catch(error => {
+                    console.log('Não foi possível reproduzir o vídeo automaticamente:', error);
+                    unlock();
+                });
+        }
+    }
+
     function unlock() {
+        if (unlocked) return;
+        unlocked = true;
+        
+        console.log('Desbloqueando site...');
         introContainer.style.opacity = '0';
         setTimeout(() => {
             introContainer.style.display = 'none';
@@ -22,7 +60,14 @@ window.addEventListener('load', () => {
         }, 800);
     }
 
-    video.onended = unlock;
+    video.addEventListener('ended', unlock, { once: true });
+    
+    // Adiciona listener para erros de vídeo
+    video.addEventListener('error', (e) => {
+        console.error('Erro ao carregar vídeo:', e);
+        unlock();
+    }, { once: true });
+    
     startSite();
 });
 
