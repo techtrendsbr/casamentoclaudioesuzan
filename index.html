@@ -19,6 +19,32 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Scroll Arrow */
+.scroll-indicator {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    animation: bounce 2s infinite;
+    z-index: 2;
+}
+
+.jumping-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    transform: rotate(45deg);
+    margin: 10px auto 0;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+    40% { transform: translateX(-50%) translateY(-10px); }
+    60% { transform: translateX(-50%) translateY(-5px); }
+}
+
 body.scroll-locked {
     overflow: hidden;
 }
@@ -42,6 +68,7 @@ body.scroll-locked {
     align-items: center; 
     text-align: center; 
 }
+
 
 .btn-main, .btn-secondary { 
     padding: 15px 30px; 
@@ -150,12 +177,27 @@ body.scroll-locked {
 }
 
 .padrinhos-grid-4 { display: grid; grid-template-columns: 1fr 1.5fr 1.5fr 1fr; gap: 40px; width: 100%; margin-top: 40px; align-items: center; }
-.p-list-col { display: flex; flex-direction: column; gap: 5px; }
+.p-list-col { height: 450px; 
+    position: relative;
+    overflow-y: auto; 
+    overflow-x: hidden; /* Trava qualquer movimento lateral */
+    touch-action: pan-y; /* Permite apenas o deslize vertical nesta área */
+    -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 3px; /* DISTÂNCIA REDUZIDA: diminua este valor se quiser ainda mais perto */
+    width: 100%;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)
+    width: 100%; /* Garante que a coluna ocupe todo o espaço sem sobras */
+    scroll-behavior: smooth;
+    padding: 60px 0;
+}
 .p-display-img { position: relative; height: 500px; aspect-ratio: 9/16; border-radius: 20px; border: 1px solid var(--glass-border); overflow: hidden; background: #000; }
-.media-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s; }
-.media-active { opacity: 1 !important; z-index: 10; }
-.p-name-item { padding: 15px; cursor: pointer; transition: 0.3s; color: rgba(255,255,255,0.5); font-size: 1.1rem; text-align: center; }
-.p-name-item.selected { color: var(--gold); border-bottom: 1px solid var(--gold); font-weight: 600; }
+.media-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s ease-in-out; opacity: 0; z-index: 1; }
+.media-active { opacity: 1 !important; z-index: 2; }
+.p-name-item { padding: 5px; cursor: pointer; transition: 0.3s; color: rgba(255,255,255,0.5); font-size: 1.1rem; text-align: center; }
+.p-name-item.selected { color: var(--gold); font-weight: 600; }
 
 .venue-split-container { display: grid; grid-template-columns: 6.5fr 3.5fr; gap: 60px; width: 100%; max-width: 1200px; align-items: start; }
 .local-sticky-box { position: sticky; top: 20vh; }
@@ -195,6 +237,37 @@ body.scroll-locked {
 .pw-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
 .pw-grid img { width: 100%; height: 300px; object-fit: cover; border-radius: 10px; transition: 0.3s; }
 
+/* Container da foto para permitir sobreposição */
+.pw-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    line-height: 0; /* Remove espaços fantasmas abaixo da imagem */
+}
+
+/* Estilo da Legenda */
+.pw-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    padding: 15px 10px 15px 10px;
+    font-size: 0.75rem; /* Letra pequena */
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    line-height: 1.2;
+    pointer-events: none; /* Não atrapalha o clique na foto */
+    max-height: 2.8em; /* Limita a no máximo 2 linhas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+
 .hotel-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
 .hotel-item span { color: rgba(255, 255, 255, 0.9); font-family: 'Inter', sans-serif; font-size: 1rem; }
 
@@ -217,71 +290,151 @@ body.scroll-locked {
     border-radius: 10px;
 }
 
-/* Linha do Item */
-.gift-item {
-    display: grid;
-    grid-template-columns: 80px 1fr 120px;
-    align-items: center;
-    gap: 15px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--glass-border);
-    padding: 12px;
-    border-radius: 15px;
-    transition: 0.3s;
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 100px;
+/* Sistema de Filtros */
+.gift-filters {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--glass-border);
 }
 
-.gift-item:hover {
-    background: rgba(255, 255, 255, 0.08);
+.filter-btn {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.filter-btn.active {
+    background: var(--gold);
+    color: #000;
     border-color: var(--gold);
 }
 
-/* Foto à Esquerda */
+/* Card do Produto */
+.gift-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.gift-item.hidden { display: none; }
+
 .gift-img {
     width: 80px;
-    height: 80px;
-    border-radius: 10px;
+    height: 120px;
+    border-radius: 8px;
     background-size: cover;
     background-position: center;
     border: 1px solid var(--glass-border);
 }
 
-/* Coluna do Meio */
 .gift-info h4 {
-    color: #fff;
-    margin: 0 0 5px 0;
+    color: var(--gold);
+    margin: 0 0 2px 0;
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .gift-info p {
-    color: rgba(255, 255, 255, 0.6);
-    margin: 0;
-    font-size: 0.85rem;
-    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 10px 0;
+    font-size: 0.75rem;
 }
 
-/* Coluna da Direita */
-.gift-action {
-    text-align: right;
+/* Grade de Botões UNIFORME (3 Colunas) */
+.cota-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    width: 100%;
 }
 
-/* Ajuste Mobile */
-@media (max-width: 600px) {
-    .gift-item {
-        grid-template-columns: 70px 1fr;
-        grid-template-rows: auto auto;
-    }
-    .gift-action {
-        grid-column: 1 / -1;
-        text-align: center;
-        margin-top: 5px;
-    }
-    .gift-action .btn-secondary {
-        width: 100%;
-        padding: 8px;
-    }
+.btn-gift {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: #fff;
+    padding: 6px 2px;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 40px;
+}
+
+.btn-gift span {
+    font-weight: bold;
+    color: var(--gold);
+    font-size: 0.75rem;
+}
+
+.individual-btn {
+    grid-column: span 1; 
+}
+
+.btn-gift.pago {
+    opacity: 0.2;
+    text-decoration: line-through;
+    pointer-events: none;
+    border-color: rgba(255,255,255,0.1);
+}
+
+
+.aviso-domingo {
+    background: #fff5f5;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    margin-bottom: 15px;
+}
+
+.salao-item h5 {
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.salao-item ul {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.9em;
+}
+
+.salao-item li {
+    padding: 5px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Esconde no Desktop, mostra no Mobile */
+@media (min-width: 901px) {
+    .scroll-arrow { display: none; }
+}
+
+@media (max-width: 480px) {
+    .gift-item { gap: 10px; padding: 12px; }
+    .gift-img { width: 60px; height: 90px; }
+    .gift-info h4 { font-size: 0.9rem; }
+    .pw-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 900px) {
@@ -315,8 +468,8 @@ body.scroll-locked {
     .list-woman { grid-area: list-woman; text-align: center !important; }
     
     .p-display-img { height: auto !important; width: 100% !important; aspect-ratio: 9/16; border-radius: 15px; }
-    .p-list-col { height: 140px; overflow-y: scroll; mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%); }
-    .p-name-item { padding: 10px 0; font-size: 0.95rem; opacity: 0.3; border: none !important; }
+    .p-list-col { height: 170px; overflow-y: scroll; mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%); }
+    .p-name-item { padding: 3px 0; font-size: 0.95rem; opacity: 0.3; border: none !important; }
     .p-name-item.selected { opacity: 1; transform: scale(1.1); font-weight: bold; }
     
     .venue-split-container, .pre-wedding-split { grid-template-columns: 1fr; gap: 30px; }
@@ -340,10 +493,33 @@ body.scroll-locked {
     .local-photos-grid img {
         height: 80px !important; /* Altura reduzida para mobile */
     }
+    @media (max-width: 900px) {
+    /* Reduz o título "Nosso propósito é ajudar" */
+    #rsvp-gifts .venue-split-container h2 {
+        font-size: 1.8rem !important; /* Estava em 3rem */
+        margin-bottom: 15px !important;
+        line-height: 1.2 !important;
+    }
 
-@media (max-width: 480px) {
-    .pw-grid { grid-template-columns: 1fr; }
+    /* Reduz o parágrafo descritivo da seção */
+    #rsvp-gifts .venue-split-container p {
+        font-size: 0.95rem !important; /* Estava em 1.2rem */
+        line-height: 1.5 !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* Ajuste opcional: diminui o espaçamento interno do container para ganhar espaço */
+    #rsvp-gifts .venue-split-container {
+        gap: 20px !important;
+    }
+
+    /* Ajuste nas fotos dos sonhos para não ficarem muito grandes no mobile */
+    #rsvp-gifts .venue-split-container div[style*="display: flex"] {
+        gap: 10px !important;
+    }
 }
+
+
 </style>
 </head>
 <body class="scroll-locked">
@@ -386,8 +562,8 @@ body.scroll-locked {
             </div>
         </div>
         <div class="scroll-indicator">
-            <span>Role para começar</span>
-            <div class="scroll-arrow"></div>
+            <span>Toque para começar</span>
+            <div class="jumping-arrow"></div>
         </div>
     </div>
 
@@ -411,7 +587,7 @@ body.scroll-locked {
                         </div>
                     </div>
                      <button id="btn-journey-gallery" class="btn-secondary" onclick="openJourneyModal()" style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 50; opacity: 0; transition: opacity 0.5s ease; pointer-events: none; width: auto; padding: 10px 25px; bottom: 11%;">
-                            Ver Galeria de Fotos
+                            Ver Galeria
                         </button>
                 </div>
             </div>
@@ -459,6 +635,7 @@ body.scroll-locked {
       <section id="padrinhos" class="static-section" style="background-image: url('couple.webp');">
             <div class="static-content">
                 <h2 class="section-title">Nossos Padrinhos</h2>
+                <p class="section-subtitle">Será uma honra tê-los conosco!</p>
                 <div class="padrinhos-grid-4">
                     <div class="p-list-col list-man">
                         <div class="p-name-item selected" onclick="changeMan(0, this)">Pedro</div>
@@ -476,14 +653,17 @@ body.scroll-locked {
                     </div>
 
                     <div id="padrinho-display" class="p-display-img vid-man">
-                        <video id="padrinho-video" src="padrinho01.mp4" loop muted playsinline class="media-layer media-active"></video>
+                        <video id="padrinho-video-1" src="padrinho01.mp4" loop muted playsinline autoplay class="media-layer media-active"></video>
+                        <video id="padrinho-video-2" loop muted playsinline class="media-layer"></video>
                     </div>
 
                     <div id="madrinha-display" class="p-display-img vid-woman">
-                        <video id="madrinha-video" src="madrinha01.mp4" loop muted playsinline class="media-layer media-active"></video>
+                        <video id="madrinha-video-1" src="madrinha01.mp4" loop muted playsinline autoplay class="media-layer media-active"></video>
+                        <video id="madrinha-video-2" loop muted playsinline class="media-layer"></video>
                     </div>
 
-                    <div class="p-list-col list-woman" style="text-align: right;">
+
+                    <div class="p-list-col list-woman" >
                         <div class="p-name-item selected" onclick="changeWoman(0, this)">Paula</div>
                         <div class="p-name-item" onclick="changeWoman(1, this)">Monique</div>
                         <div class="p-name-item" onclick="changeWoman(2, this)">Nadiesca</div>
@@ -569,7 +749,7 @@ body.scroll-locked {
 
         <section id="pre-wedding" class="static-section" style="background-image: url('couple.webp');">
             <div class="static-content">
-                <h2 class="section-title" style="margin-bottom: 10px;">Dress Code & Confirmação</h2>
+                <h2 class="section-title" style="margin-bottom: 10px;">Trajes & Confirmação</h2>
                 <p class="section-subtitle" style="margin-bottom: 40px; color: var(--gold);">Veja as informações abaixo com atenção para celebrar esse momento especial conosco! </p>
 
                 <div class="pre-wedding-split">
@@ -577,9 +757,9 @@ body.scroll-locked {
                     <div class="glass-card" style="align-items: flex-start; text-align: left;">
                         <h3 style="color: var(--gold); margin: 0 0 10px 0; font-family: 'Playfair Display', serif; font-size: 1.6rem;">Padrinhos & Madrinhas</h3>
                         <p style="color: rgba(255,255,255,0.9); margin-bottom: 15px; line-height: 1.6; font-size: 0.95rem;">
-                            <strong>Madrinhas:</strong> Vestido longo na cor <strong>Verde Oliva</strong> (conforme paleta enviada).<br>
-                            <strong>Padrinhos:</strong> Terno cinza claro, colete opcional e <strong>sapato marrom</strong>. 
-                            <span style="display: block; margin-top: 5px; font-style: italic; color: var(--gold);">* A gravata oficial será enviada no seu convite/presente.</span>
+                            <strong>Madrinhas:</strong> Vestido longo na cor <strong>Verde Oliva</strong>.<br>
+                            <strong>Padrinhos:</strong> Terno cinza claro, colete cinza claro e <strong>sapato marrom</strong>. 
+                            <span style="display: block; margin-top: 5px; font-style: italic; color: var(--gold);">*Gravata vai no convite. **Conferir paleta com noiva ou cerimonialista</span>
                         </p>
                     
                         <hr style="width: 100%; border: 0; border-top: 1px solid var(--glass-border); margin: 20px 0;">
@@ -587,34 +767,43 @@ body.scroll-locked {
                         <h3 style="color: var(--gold); margin: 0 0 15px 0; font-family: 'Playfair Display', serif; font-size: 1.6rem;">Convidados</h3>
                         <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.7; font-size: 1.05rem;">
                             <strong>Passeio Completo / Esporte Fino</strong><br>
-                            Recomendamos para as damas vestidos longos ou midi. Para os cavalheiros, terno (com ou sem gravata) será ideal.
-                            <br><br>Pedimos, com carinho, que <strong><u>evitem tons claros (branco/nude) e o verde oliva</u></strong> reservado aos padrinhos.
+                            Recomendamos às damas vestidos longos ou midi. Aos cavalheiros, terno (com ou sem gravata) será ideal.
+                            <br><br>Pedimos, com carinho, que <strong><u>evitem tons branco/nude e o verde oliva</u></strong> reservado à noiva e padrinhos.
                         </p>
 
                         <div style="margin-bottom: 25px;">
-                            <p style="color: var(--gold); margin: 0 0 15px 0; font-family: 'Playfair Display', serif; font-size: 1.2rem;">Paleta Sugerida (Convidados)</p>
-                            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                                <div style="display: flex; align-items: center; gap: 10px;">
-                                    <div style="width: 35px; height: 35px; border-radius: 50%; background: #000; border: 2px solid var(--gold);"></div>
-                                    <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Preto</span>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 10px;">
-                                    <div style="width: 35px; height: 35px; border-radius: 50%; background: #2c3e50; border: 2px solid var(--gold);"></div>
-                                    <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Azul Escuro</span>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 10px;">
-                                    <div style="width: 35px; height: 35px; border-radius: 50%; background: #8b0000; border: 2px solid var(--gold);"></div>
-                                    <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Vinho</span>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 10px;">
-                                    <div style="width: 35px; height: 35px; border-radius: 50%; background: #4a4a4a; border: 2px solid var(--gold);"></div>
-                                    <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Cinza</span>
-                                </div>
-                            </div>
-                        </div>
+    <p style="color: var(--gold); margin: 0 0 5px 0; font-family: 'Playfair Display', serif; font-size: 1.2rem;">Sugestão aos Convidados</p>
+    
+<div style="display: flex; gap: 15px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 35px; height: 35px; border-radius: 50%; background: #E1C699; border: 2px solid var(--gold);"></div>
+            <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Bege</span>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 35px; height: 35px; border-radius: 50%; background: #87CEEB; border: 2px solid var(--gold);"></div>
+            <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Azul Soft</span>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 35px; height: 35px; border-radius: 50%; background: #F4C2C2; border: 2px solid var(--gold);"></div>
+            <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Rosa</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 35px; height: 35px; border-radius: 50%; background: #D2B48C; border: 2px solid var(--gold);"></div>
+            <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Areia</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 35px; height: 35px; border-radius: 50%; background: #A9A9A9; border: 2px solid var(--gold);"></div>
+            <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Cinza</span>
+        </div>
+    </div>
+</div>
 
                         <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-style: italic; font-size: 1rem; border-top: 1px solid var(--gold); padding-top: 20px;">
-                            A elegância está na simplicidade e no conforto. O mais importante é que vocês se sintam bem para celebrarem conosco este momento inesquecível de amor e união. ❤️
+                            O mais importante é se sentir bem para celebrar este momento conosco. ❤️
                         </p>
                     </div>
                     
@@ -622,7 +811,7 @@ body.scroll-locked {
                         <svg class="svg-icon" viewBox="0 0 24 24" fill="var(--gold)"><path d="M4 4h6v6H4zm2 2v2h2V6zm12-2h-6v6h6zm-2 2v2h2V6zM4 14h6v6H4zm2 2v2h2v-2zM15 14h-2v2h2zm2 0h-2v2h2zm-2 2h-2v2h2zm2 0h-2v2h2zm2-4h-2v2h2zm-2 4h-2v2h2zm0 2h-2v2h2zm-4-6h-2v2h2z"/></svg>
                         <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.2rem; margin-bottom: 15px;">Atenção ⚠️</h2>
                         <p style="color:#fff; font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; opacity: 0.9;">
-                            Você <u>PRECISA</u> confirmar sua presença <u>até 31/07</u> com nossa cerimonialista! Por favor nos ajude com isso pois é importante para nossa organização.
+                            Você <u>PRECISA</u> confirmar sua presença com nossa cerimonialista <u>até 31/07</u>! Nos ajude com isso, pois é importante para a organização.
                         </p>
                         <div class="qr-container">
                             <img src="https://quickchart.io/qr?text=https%3A%2F%2Fwa.me%2F5547999042263%3Ftext%3DConfirmar%2520presen%25C3%25A7a%2520no%2520casamento%2520Claudio%2520e%2520Suzan&dark=000000&light=ffffff&ecLevel=Q&format=svg" loading="lazy" alt="QR Code">
@@ -667,11 +856,11 @@ body.scroll-locked {
             <div class="glass-card" style="margin-top: 0;">
                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3s-3 1.34-3 3c0 .35.07.69.18 1H4c-1.11 0-2 .89-2 2v11c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg>
                 <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.2rem; margin-bottom: 10px;">Presentes</h2>
-                <p style="opacity: 0.8; margin-bottom: 30px; color:#fff; font-family: 'Inter', sans-serif;">Contribua com nossos projetos. Qualquer ajuda é bem-vinda!</p>
+                <p style="opacity: 0.8; margin-bottom: 30px; color:#fff; font-family: 'Inter', sans-serif;">Contribua com nossos projetos. Sua ajuda será bem-vinda!</p>
                 
                 <div style="display: flex; gap: 15px; width: 100%; flex-direction: column;">
-                    <button class="btn-secondary" onclick="openCustomModal('modal-presentes')">Acessar Lista Virtual</button>
-                    <button class="btn-main" onclick="openCustomModal('modal-pix')">Copiar Pix do Casal</button>
+                    <button class="btn-main" onclick="openCustomModal('modal-presentes')"> Lista Virtual</button>
+                   
                 </div>
             </div>
 
@@ -695,15 +884,42 @@ body.scroll-locked {
             <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.2rem; margin-bottom: 30px; text-align: center;">Nossa História em Fotos</h2>
             
             <div class="pw-grid">
-                <img src="foto01.webp" loading="lazy" alt="História">
-                <img src="foto02.webp" loading="lazy" alt="História">
-                <img src="foto03.webp" loading="lazy" alt="História">
-                <img src="foto04.webp" loading="lazy" alt="História">
-                <img src="foto05.webp" loading="lazy" alt="História">
-                <img src="foto06.webp" loading="lazy" alt="História">
-                <img src="foto07.webp" loading="lazy" alt="História">
-                <img src="foto08.webp" loading="lazy" alt="História">
-                <img src="foto09.webp" loading="lazy" alt="História">
+                <div class="pw-item">
+                    <img src="foto06.webp" loading="lazy" alt="História">
+                    <div class="pw-caption">"Já era": O primeiro encontro</div>
+                </div>
+                <div class="pw-item">
+                    <img src="foto01.webp" loading="lazy" alt="História">
+                    <div class="pw-caption">Juntos no RJ</div>
+                </div>
+                <div class="pw-item">
+                    <img src="foto02.webp" loading="lazy" alt="História">
+                    <div class="pw-caption">"Trouxe a chuva de novo?"</div>
+                </div>
+                <div class="pw-item">
+                    <img src="foto03.webp" loading="lazy" alt="História">
+                    <div class="pw-caption">Primeira vez dela brava</div>
+                </div>
+                <div class="pw-item">
+                    <img src="foto04.webp" loading="lazy" alt="História">
+                    <div class="pw-caption">Primeira vez dele na casa do sogro</div>
+                </div>
+                <div class="pw-item">
+                    <img src="foto05.webp" loading="lazy" alt="História">
+                    <div class="pw-caption">Falando mal de convidados</div>
+                </div>
+                <div class="pw-item">
+                    <img src="foto07.webp" loading="lazy" alt="História">
+                    <div class="pw-caption">Ele fazendo gracinha quando não devia</div>
+                </div>
+                <div class="pw-item">
+                    <img src="foto08.webp" loading="lazy" alt="História">
+                    <div class="pw-caption">Ela linda e ele engraçado</div>
+                </div>
+                <div class="pw-item">
+                    <img src="foto09.webp" loading="lazy" alt="História">
+                    <div class="pw-caption">Ela se formando e ele lá!</div>
+                </div>
             </div>
         </div>
     </div>
@@ -727,6 +943,7 @@ body.scroll-locked {
                 <button class="tab-btn active" onclick="switchTab(event, 'tab-espaco')">O Espaço</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab-turismo')">Turismo</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab-hoteis')">Hotéis</button>
+                <button class="tab-btn" onclick="switchTab(event, 'saloes-info')">Salões</button>
             </div>
 
             <div id="tab-espaco" class="tab-content active">
@@ -864,126 +1081,449 @@ body.scroll-locked {
         <span>Pousada Al Mare</span>
         <a href="https://www.booking.com/hotel/br/pousada-al-mare.pt-br.html" target="_blank" class="btn-secondary" style="width: auto; padding: 8px 15px; margin: 0; text-decoration: none; font-size: 0.9rem;">Reservar</a>
     </div>
-</div> </div> </div> <div id="modal-presentes" class="custom-modal">
+</div> 
+<div id="saloes-info" class="tab-content">
+    <div class="aviso-domingo">
+        <p><strong>🚨 Atenção ao Domingo:</strong> Salões de rua não costumam abrir aos domingos, então recomendamos <strong>agendar com antecedência</strong>. As melhores opções para este dia são salões em Shoppings (Balneário Shopping ou Atlântico Shopping).</p>
+    </div>
+
+    <div class="lista-saloes">
+        <div class="salao-item">
+            <h5>Profissionais Independentes</h5>
+            <p>Conversamos com A Jozi Minela, uma profissional  de qualidade da região, que disse que abrirá agenda para a festa, desde que agendado com antecedência, por questão de disponibilidade:</p>
+            <ul>
+                <li><strong>Whatsapp:</strong> +55 47 99909-4691</li>
+                <li><strong>Instagram:</strong> @ozimakeup</li>
+            </ul>
+        </div> <br>
+        <div class="salao-item">
+            <h5>Salões Conhecidos</h5>
+            <p>Geralmente funcionam aos domingos. São as opções mais seguras.</p>
+            <ul>
+                <li><strong>Complexo de Beleza Lala Conté</strong> Av. Normando Tedesco, 1735 - Sala 01, 02 e 04 - Barra Sul, Balneário Camboriú - SC</li>
+                <li><strong>Léia Salão</strong> Av. Atlântica, 3750 – salas 1 e 2 - CEP 88300-024. Barra Sul, Balneário Camboriú/SC</li>
+            </ul>
+        </div>
+
+        
+    </div>
+</div>
+
+</div> </div> <div id="modal-presentes" class="custom-modal">
     <div class="modal-box">
         <button class="close-modal-btn" onclick="closeCustomModal('modal-presentes')">✕</button>
         <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.8rem; margin-bottom: 10px; text-align: center;">Lista de Presentes Virtuais</h3>
 <p style="color: rgba(255,255,255,0.7); text-align: center; margin-bottom: 25px; font-size: 0.9rem;">Sua presença é nosso maior presente, mas se desejar contribuir com nossa jornada, escolha um item abaixo.</p>
 
-<div class="virtual-list-container">
-    <div class="gift-item">
-        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=200&q=80');"></div>
-        <div class="gift-info">
-            <h4>Jantar Romântico na Lua de Mel</h4>
-            <p>Uma noite especial para os noivos comemorarem em Veneza.</p>
-        </div>
-        <div class="gift-action">
-            <button class="btn-secondary" onclick="alert('Item selecionado!')">Escolher</button>
-        </div>
-    </div>
 
-    <div class="gift-item">
-        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1520174691701-bc555a3404ca?w=200&q=80');"></div>
-        <div class="gift-info">
-            <h4>Passeio de Gôndola</h4>
-            <p>O clássico tour pelos canais italianos.</p>
-        </div>
-        <div class="gift-action">
-            <button class="btn-secondary">Escolher</button>
-        </div>
-    </div>
 
-    <div class="gift-item">
-        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1511112536034-722108783456?w=200&q=80');"></div>
-        <div class="gift-info">
-            <h4>Café da Manhã no Quarto</h4>
-            <p>Um mimo especial para o primeiro dia de casados.</p>
-        </div>
-        <div class="gift-action">
-            <button class="btn-secondary">Escolher</button>
-        </div>
-    </div>
-
-    <div class="gift-item">
-        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=80');"></div>
-        <div class="gift-info">
-            <h4>Hospedagem em Hotel Boutique</h4>
-            <p>Cota para uma diária em um hotel histórico.</p>
-        </div>
-        <div class="gift-action">
-            <button class="btn-secondary">Escolher</button>
-        </div>
-    </div>
-    
-    <div class="gift-item">
-        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=80');"></div>
-        <div class="gift-info">
-            <h4>Hospedagem em Hotel Boutique</h4>
-            <p>Cota para uma diária em um hotel histórico.</p>
-        </div>
-        <div class="gift-action">
-            <button class="btn-secondary">Escolher</button>
-        </div>
-    </div>
-    
-    <div class="gift-item">
-        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=80');"></div>
-        <div class="gift-info">
-            <h4>Hospedagem em Hotel Boutique</h4>
-            <p>Cota para uma diária em um hotel histórico.</p>
-        </div>
-        <div class="gift-action">
-            <button class="btn-secondary">Escolher</button>
-        </div>
-    </div>
-    
-    <div class="gift-item">
-        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=80');"></div>
-        <div class="gift-info">
-            <h4>Hospedagem em Hotel Boutique</h4>
-            <p>Cota para uma diária em um hotel histórico.</p>
-        </div>
-        <div class="gift-action">
-            <button class="btn-secondary">Escolher</button>
-        </div>
-    </div>
-    
-    <div class="gift-item">
-        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=80');"></div>
-        <div class="gift-info">
-            <h4>Hospedagem em Hotel Boutique</h4>
-            <p>Cota para uma diária em um hotel histórico.</p>
-        </div>
-        <div class="gift-action">
-            <button class="btn-secondary">Escolher</button>
-        </div>
-    </div>
-    
-    <div class="gift-item">
-        <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=80');"></div>
-        <div class="gift-info">
-            <h4>Hospedagem em Hotel Boutique</h4>
-            <p>Cota para uma diária em um hotel histórico.</p>
-        </div>
-        <div class="gift-action">
-            <button class="btn-secondary">Escolher</button>
-        </div>
-    </div>
-    
-    </div>
-        </div>
+<div class="gift-filters">
+    <button class="filter-btn active" onclick="filterGifts('todos', this)">Todos</button>
+    <button class="filter-btn" onclick="filterGifts('cota', this)">Presentes em Cotas</button>
+    <button class="filter-btn" onclick="filterGifts('individual', this)">Individuais</button>
 </div>
 
-<div id="modal-pix" class="custom-modal">
-    <div class="modal-box" style="text-align: center;">
-        <button class="close-modal-btn" onclick="closeCustomModal('modal-pix')">✕</button>
-        <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.8rem; margin-bottom: 15px;">Nosso Pix</h3>
-        <p style="color: #fff; font-family: 'Inter', sans-serif; margin-bottom: 20px;">Escaneie o QR Code ou copie a chave abaixo.</p>
+<div class="virtual-list-container">
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/geladeira.webp');"></div>
+        <div class="gift-info">
+            <h4>Geladeira inox (Frost Free / Inverse)</h4>
+            <p>Valor total aproximado: R$ 4.000,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift pago">Cota (Paga) <span>R$ 550</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 600</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 750</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 800</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 900</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/lavadora.webp');"></div>
+        <div class="gift-info">
+            <h4>Máquina de lavar roupa (14kg)</h4>
+            <p>Valor total aproximado: R$ 2.500,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 600</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 700</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/lava-louca.webp');"></div>
+        <div class="gift-info">
+            <h4>Máquina de lavar louça inox</h4>
+            <p>Valor total aproximado: R$ 3.000,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 600</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 600</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/tv.webp');"></div>
+        <div class="gift-info">
+            <h4>Televisão Smart 55”</h4>
+            <p>Valor total aproximado: R$ 2.500,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 600</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 1.200</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/robo.webp');"></div>
+        <div class="gift-info">
+            <h4>Robô aspirador</h4>
+            <p>Valor total aproximado: R$ 1.500,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/aspirador-sem-fio.webp');"></div>
+        <div class="gift-info">
+            <h4>Aspirador sem fio</h4>
+            <p>Valor total aproximado: R$ 1.000,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/fogao.webp');"></div>
+        <div class="gift-info">
+            <h4>Fogão inox 5 bocas</h4>
+            <p>Valor total aproximado: R$ 1.500,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 800</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/forno.webp');"></div>
+        <div class="gift-info">
+            <h4>Forno elétrico inox</h4>
+            <p>Valor total aproximado: R$ 1.000,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/microondas.webp');"></div>
+        <div class="gift-info">
+            <h4>Micro-ondas inox</h4>
+            <p>Valor total aproximado: R$ 750,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 250</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 250</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 250</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/airfryer.webp');"></div>
+        <div class="gift-info">
+            <h4>Airfryer inox (grande)</h4>
+            <p>Valor total aproximado: R$ 600,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 200</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/cafe-espresso.webp');"></div>
+        <div class="gift-info">
+            <h4>Máquina de café (espresso)</h4>
+            <p>Valor total aproximado: R$ 1.200,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/multiprocessador.webp');"></div>
+        <div class="gift-info">
+            <h4>Multiprocessador (completo)</h4>
+            <p>Valor total aproximado: R$ 600,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/batedeira.webp');"></div>
+        <div class="gift-info">
+            <h4>Batedeira planetária</h4>
+            <p>Valor total aproximado: R$ 700,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 350</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 350</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/panelas.webp');"></div>
+        <div class="gift-info">
+            <h4>Jogo de panelas premium</h4>
+            <p>Valor total aproximado: R$ 1.000,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="cota">
+        <div class="gift-img" style="background-image: url('img/coifa.webp');"></div>
+        <div class="gift-info">
+            <h4>Coifa inox</h4>
+            <p>Valor total aproximado: R$ 1.000,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/liquidificador.webp');"></div>
+        <div class="gift-info">
+            <h4>Liquidificador inox</h4>
+            <p>R$ 250,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 250</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/liq-portatil.webp');"></div>
+        <div class="gift-info">
+            <h4>Liquidificador portátil</h4>
+            <p>R$ 150,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 150</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/mixer.webp');"></div>
+        <div class="gift-info">
+            <h4>Mixer inox (3 em 1)</h4>
+            <p>R$ 250,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 250</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/chaleira.webp');"></div>
+        <div class="gift-info">
+            <h4>Chaleira elétrica inox</h4>
+            <p>R$ 200,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 200</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/cafeteira.webp');"></div>
+        <div class="gift-info">
+            <h4>Cafeteira inox (tradicional)</h4>
+            <p>R$ 250,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 250</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/sanduicheira.webp');"></div>
+        <div class="gift-info">
+            <h4>Sanduicheira inox</h4>
+            <p>R$ 150,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 150</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/ninja-creami.webp');"></div>
+        <div class="gift-info">
+            <h4>Máquina de sorvete (Ninja Creami)</h4>
+            <p>R$ 700,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 700</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/filtro.webp');"></div>
+        <div class="gift-info">
+            <h4>Filtro de água</h4>
+            <p>R$ 200,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 200</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/faqueiro.webp');"></div>
+        <div class="gift-info">
+            <h4>Faqueiro inox (24–30 peças)</h4>
+            <p>R$ 300,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 300</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/jantar.webp');"></div>
+        <div class="gift-info">
+            <h4>Aparelho de jantar branco</h4>
+            <p>R$ 400,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 400</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/edredom.webp');"></div>
+        <div class="gift-info">
+            <h4>Edredom branco (casal/queen)</h4>
+            <p>R$ 250,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 250</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/lençol.webp');"></div>
+        <div class="gift-info">
+            <h4>Jogo de lençol branco</h4>
+            <p>R$ 200,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 200</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/cama-completo.webp');"></div>
+        <div class="gift-info">
+            <h4>Jogo de cama branco completo</h4>
+            <p>R$ 300,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 300</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/travesseiro.webp');"></div>
+        <div class="gift-info">
+            <h4>Travesseiros (par)</h4>
+            <p>R$ 100,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 100</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/toalhas.webp');"></div>
+        <div class="gift-info">
+            <h4>Jogo de toalhas branco</h4>
+            <p>R$ 200,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 200</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="gift-item" data-category="individual">
+        <div class="gift-img" style="background-image: url('img/ferro.webp');"></div>
+        <div class="gift-info">
+            <h4>Ferro de passar a vapor</h4>
+            <p>R$ 200,00</p>
+            <div class="cota-grid">
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Jantar Romântico', 'url_do_qr_jantar.png', 'codigo_pix_longo_do_jantar_aqui')">Presentear <span>R$ 200</span></button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+
+
+
+<div id="modal-presente-dinamico" class="reveal-modal">
+    <div class="reveal-content pix-card" style="text-align: center; border: 2px solid var(--gold);">
+        <button class="close-reveal" onclick="closeCustomModal('modal-presente-dinamico')">×</button>
         
-        <img src="https://res.cloudinary.com/dabmzfood/image/upload/v1776763264/pix-claudioesuzan_pvldkt.webp" loading="lazy" alt="QR Code Pix" style="border-radius: 10px; border: 2px solid var(--gold); margin-bottom: 20px; width: 150px;">
+        <h3 id="modal-titulo-presente" style="color: var(--gold); font-family: 'Playfair Display', serif; margin-bottom: 15px;">Nome do Presente</h3>
         
-        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-family: monospace; font-size: 1.1rem; border: 1px dashed var(--glass-border); color: #fff;">chave: +5521981038503</div>
-        <button class="btn-main" onclick="copiarPixChave()">Copiar Chave Pix</button>
+        <div style="background: white; padding: 10px; display: inline-block; border-radius: 12px; margin-bottom: 20px;">
+            <img id="modal-qr-code" src="" alt="QR Code Pix" style="width: 160px; height: 160px;">
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed var(--glass-border);">
+            <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 5px;">Código Pix Copia e Cola:</p>
+            <div id="modal-pix-codigo" style="font-family: monospace; font-size: 0.85rem; color: #fff; word-break: break-all; max-height: 60px; overflow-y: auto; padding: 5px;"></div>
+        </div>
+
+        <button id="btn-copiar-modal" class="btn-main" onclick="executarCopiaDinamica(this)" style="width: 100%;">Copiar Código Pix</button>
     </div>
 </div>
 
@@ -1056,9 +1596,10 @@ body.scroll-locked {
         if (musicStarted) return;
 
         const musicElement = document.getElementById('wedding-music');
+        const introContainer = document.getElementById('intro-container');
 
-        // Tenta tocar a música diretamente quando houver qualquer interação
-        if (musicElement) {
+        // Só tenta se a intro já sumiu e o elemento existe
+        if (musicElement && (!introContainer || introContainer.style.display === 'none')) {
             musicElement.play().then(() => {
                 musicStarted = true;
                 isPlaying = true;
@@ -1069,7 +1610,7 @@ body.scroll-locked {
                 });
                 console.log("Música iniciada pelo primeiro scroll/interação.");
             }).catch(err => {
-                // Caso o navegador ainda bloqueie, ele tentará na próxima interação
+                // Caso o navegador ainda bloqueie, ele tentará na próxima interação de scroll
                 console.log("Aguardando interação válida para áudio...");
             });
         }
@@ -1091,27 +1632,73 @@ body.scroll-locked {
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    function changeMan(idx, el) {
-        const vid = document.getElementById('padrinho-video');
-        const fileNum = (idx + 1).toString().padStart(2, '0');
-        vid.src = `padrinho${fileNum}.mp4`;
-        vid.play().catch(() => {});
-        if (el) {
-            el.parentElement.querySelectorAll('.p-name-item').forEach(i => i.classList.remove('selected'));
-            el.classList.add('selected');
-        }
-    }
+let currentManLayer = 1;
+let currentWomanLayer = 1;
 
-    function changeWoman(idx, el) {
-        const vid = document.getElementById('madrinha-video');
-        const fileNum = (idx + 1).toString().padStart(2, '0');
-        vid.src = `madrinha${fileNum}.mp4`;
-        vid.play().catch(() => {});
-        if (el) {
-            el.parentElement.querySelectorAll('.p-name-item').forEach(i => i.classList.remove('selected'));
-            el.classList.add('selected');
-        }
+function changeMan(idx, el) {
+    const layer1 = document.getElementById('padrinho-video-1');
+    const layer2 = document.getElementById('padrinho-video-2');
+    const current = currentManLayer === 1 ? layer1 : layer2;
+    const next = currentManLayer === 1 ? layer2 : layer1;
+
+    const fileNum = (idx + 1).toString().padStart(2, '0');
+    next.src = `padrinho${fileNum}.mp4`;
+    next.load();
+
+    next.oncanplaythrough = () => {
+        next.play();
+        next.classList.add('media-active');
+        current.classList.remove('media-active');
+        currentManLayer = currentManLayer === 1 ? 2 : 1;
+        next.oncanplaythrough = null;
+    };
+
+    if (el) {
+        const container = el.parentElement;
+        container.querySelectorAll('.p-name-item').forEach(i => i.classList.remove('selected'));
+        el.classList.add('selected');
+        
+        // CENTRALIZA APENAS O SCROLLER (SEM MOVER A PÁGINA)
+        const targetScroll = el.offsetTop - (container.offsetHeight / 2) + (el.offsetHeight / 2);
+        container.scrollTo({
+            top: targetScroll,
+            behavior: 'smooth'
+        });
     }
+}
+
+function changeWoman(idx, el) {
+    const layer1 = document.getElementById('madrinha-video-1');
+    const layer2 = document.getElementById('madrinha-video-2');
+    const current = currentWomanLayer === 1 ? layer1 : layer2;
+    const next = currentWomanLayer === 1 ? layer2 : layer1;
+
+    const fileNum = (idx + 1).toString().padStart(2, '0');
+    next.src = `madrinha${fileNum}.mp4`;
+    next.load();
+
+    next.oncanplaythrough = () => {
+        next.play();
+        next.classList.add('media-active');
+        current.classList.remove('media-active');
+        currentWomanLayer = currentWomanLayer === 1 ? 2 : 1;
+        next.oncanplaythrough = null;
+    };
+
+    if (el) {
+        const container = el.parentElement;
+        container.querySelectorAll('.p-name-item').forEach(i => i.classList.remove('selected'));
+        el.classList.add('selected');
+
+        // CENTRALIZA APENAS O SCROLLER (SEM MOVER A PÁGINA)
+        const targetScroll = el.offsetTop - (container.offsetHeight / 2) + (el.offsetHeight / 2);
+        container.scrollTo({
+            top: targetScroll,
+            behavior: 'smooth'
+        });
+    }
+}
+
 
     function playProposalVideo() {
         const videoSec = document.getElementById('proposal-video-reveal');
@@ -1173,12 +1760,13 @@ body.scroll-locked {
     }
 
     function openCustomModal(id) {
-        const modal = document.getElementById(id);
-        if (modal) {
-            modal.classList.add('active');
-            document.body.classList.add('scroll-locked');
-        }
+    document.getElementById(id).classList.add('active');
+    document.body.classList.add('scroll-locked'); // Trava o scroll da página ao abrir
+    if (id === 'modal-dicas') {
+        const firstTab = modal.querySelector('.tab-btn');
+        if (firstTab) firstTab.click();
     }
+}
 
     function closeCustomModal(id) {
         const modal = document.getElementById(id);
@@ -1196,10 +1784,6 @@ body.scroll-locked {
         evt.currentTarget.classList.add('active');
     }
 
-    function copiarPixChave() {
-        const chave = "+5521981038503";
-        navigator.clipboard.writeText(chave).then(() => { alert("Chave Pix copiada com sucesso!"); }).catch(() => {});
-    }
 
     function scrollToJourneyEnd(e) {
         if (e) e.preventDefault();
@@ -1255,8 +1839,9 @@ body.scroll-locked {
         }
     }
 
+if (musicBtn) {
     musicBtn.addEventListener('click', () => toggleMusic());
-
+}
     let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
@@ -1355,6 +1940,86 @@ body.scroll-locked {
             else { step.classList.remove('active'); }
         });
     }
+    
+    function scrollNames(type, direction) {
+    // Identifica qual container mover baseado no parâmetro 'woman' ou 'man'
+    const container = type === 'woman' 
+        ? document.querySelector('.list-woman') 
+        : document.querySelector('.list-man');
+    
+    if (container) {
+        const scrollAmount = 40; // Quantidade de pixels por clique
+        container.scrollBy({
+            top: direction * scrollAmount,
+            behavior: 'smooth'
+        });
+    }
+}
+    
+    function filterGifts(category, btn) {
+    // Atualiza botões do filtro
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Filtra os itens
+    const items = document.querySelectorAll('.gift-item');
+    items.forEach(item => {
+        if (category === 'todos') {
+            item.classList.remove('hidden');
+        } else {
+            if (item.getAttribute('data-category') === category) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
+            }
+        }
+    });
+}
+
+// 1. Função para alimentar o modal com os dados do presente clicado
+function preencherEAbrirModal(titulo, qrUrl, pixCodigo) {
+    document.getElementById('modal-titulo-presente').innerText = titulo;
+    document.getElementById('modal-qr-code').src = qrUrl;
+    document.getElementById('modal-pix-codigo').innerText = pixCodigo;
+    
+    // Abre o modal usando a função que você já tem
+    openCustomModal('modal-presente-dinamico');
+}
+
+// 2. Função de cópia com feedback visual "Copiado!"
+function executarCopiaDinamica(btn) {
+    const codigoPix = document.getElementById('modal-pix-codigo').innerText;
+    
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(codigoPix).then(() => {
+            mostrarFeedbackSucesso(btn);
+        });
+    } else {
+        // Fallback para navegadores antigos ou sem HTTPS
+        const textArea = document.createElement("textarea");
+        textArea.value = codigoPix;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        mostrarFeedbackSucesso(btn);
+    }
+}
+
+// 3. Efeito visual do botão
+function mostrarFeedbackSucesso(btn) {
+    const textoOriginal = btn.innerText;
+    btn.innerText = "✓ Copiado!";
+    btn.style.backgroundColor = "#4CAF50"; // Verde Sucesso
+    btn.style.color = "white";
+    
+    setTimeout(() => {
+        btn.innerText = textoOriginal;
+        btn.style.backgroundColor = ""; // Volta ao original do CSS
+        btn.style.color = "";
+    }, 2500);
+}
+
 </script>
 </body>
 </html>
