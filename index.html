@@ -9,10 +9,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
-        :root { 
-    --gold: #d4a373; 
-    --glass: rgba(255, 255, 255, 0.05); 
-    --glass-border: rgba(255, 255, 255, 0.1); 
+        /* --- DEFINIÇÃO DA NOVA PALETA DE CORES (Baseada no anexo) --- */
+:root {
+    /* Cores Principais Extraídas da Imagem */
+    --gold-accent: #b59e78;    /* O cobre/ouro envelhecido para destaques e botões */
+    --fendi-light: #dcdad1;    /* O cinza claro/fendi para fundos claros e textos */
+    --fendi-dark: #6e645a;     /* O marrom taupe para elementos secundários */
+    --black: #1a1a1a;          /* O preto profundo para o fundo principal */
+    
+    /* Variações e Transparências para o efeito Glassmorphism */
+    --glass-white: rgba(220, 218, 209, 0.08); 
+    --glass-border: rgba(220, 218, 209, 0.15); 
+    --text-on-dark: #dcdad1;   
+    --text-on-light: #1a1a1a;  
 }
 
 html {
@@ -224,8 +233,9 @@ body.scroll-locked {
 .custom-modal.active { opacity: 1; pointer-events: auto; }
 .modal-box { background: #111; border: 1px solid var(--gold); border-radius: 20px; width: 100%; max-width: 600px; padding: 30px; position: relative; max-height: 90vh; overflow-y: auto; text-align: left; }
 .close-modal-btn { position: absolute; top: 15px; right: 15px; background: transparent; color: #fff; border: none; font-size: 1.5rem; cursor: pointer; }
-.tab-header { display: flex; border-bottom: 1px solid var(--glass-border); margin-bottom: 20px; }
-.tab-btn { flex: 1; background: none; border: none; color: #fff; padding: 10px; cursor: pointer; opacity: 0.5; transition: 0.3s; }
+.tab-header { display: flex; border-bottom: 1px solid var(--glass-border); margin-bottom: 20px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; -ms-overflow-style: none; justify-content: flex-start; padding-bottom: 2px;}
+.tab-header::-webkit-scrollbar {display: none;}
+.tab-btn { flex: 0 0 auto; background: none; border: none; color: #fff; padding: 10px; cursor: pointer; opacity: 0.5; transition: 0.3s; font-size: 0.9rem; }
 .tab-btn.active { opacity: 1; border-bottom: 2px solid var(--gold); color: var(--gold); font-weight: bold;}
 .tab-content { display: none; color: #fff; line-height: 1.6;}
 .tab-content.active { display: block; }
@@ -253,18 +263,17 @@ body.scroll-locked {
     right: 0;
     background: rgba(0,0,0,0.8);
     color: #fff;
-    padding: 15px 10px 15px 10px;
-    font-size: 0.75rem; /* Letra pequena */
+    padding: 12px 10px; /* Padding levemente reduzido */
+    font-size: 0.85rem; /* Fonte um pouco maior para leitura */
     font-family: 'Inter', sans-serif;
     text-align: center;
-    line-height: 1.2;
-    pointer-events: none; /* Não atrapalha o clique na foto */
-    max-height: 2.8em; /* Limita a no máximo 2 linhas */
+    line-height: 1.3; /* Espaçamento entre linhas melhorado */
+    pointer-events: none;
+    max-height: 4.5em; /* Aumentado para permitir até 3 linhas se necessário */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
 }
 
 
@@ -435,6 +444,8 @@ body.scroll-locked {
     .gift-img { width: 60px; height: 90px; }
     .gift-info h4 { font-size: 0.9rem; }
     .pw-grid { grid-template-columns: 1fr; }
+    .pw-caption { font-size: 0.75rem; padding: 8px 5px; max-height: 3.8em;}
+    .tab-btn {padding: 10px 10px; font-size: 0.85rem;}
 }
 
 @media (max-width: 900px) {
@@ -755,7 +766,7 @@ body.scroll-locked {
                 <div class="pre-wedding-split">
 
                     <div class="glass-card" style="align-items: flex-start; text-align: left;">
-                        <h3 style="color: var(--gold); margin: 0 0 10px 0; font-family: 'Playfair Display', serif; font-size: 1.6rem;">Padrinhos & Madrinhas</h3>
+                        <h3 style="color: var(--gold); margin: 0 0 10px 0; font-family: 'Playfair Display', serif; font-size: 1.6rem;">Padrinhos</h3>
                         <p style="color: rgba(255,255,255,0.9); margin-bottom: 15px; line-height: 1.6; font-size: 0.95rem;">
                             <strong>Madrinhas:</strong> Vestido longo na cor <strong>Verde Oliva</strong>.<br>
                             <strong>Padrinhos:</strong> Terno cinza claro, colete cinza claro e <strong>sapato marrom</strong>. 
@@ -774,34 +785,33 @@ body.scroll-locked {
                         <div style="margin-bottom: 25px;">
     <p style="color: var(--gold); margin: 0 0 5px 0; font-family: 'Playfair Display', serif; font-size: 1.2rem;">Sugestão aos Convidados</p>
     
-<div style="display: flex; gap: 15px; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 35px; height: 35px; border-radius: 50%; background: #E1C699; border: 2px solid var(--gold);"></div>
-            <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Bege</span>
-        </div>
-        
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 35px; height: 35px; border-radius: 50%; background: #87CEEB; border: 2px solid var(--gold);"></div>
-            <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Azul Soft</span>
-        </div>
-        
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 35px; height: 35px; border-radius: 50%; background: #F4C2C2; border: 2px solid var(--gold);"></div>
-            <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Rosa</span>
-        </div>
+<div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 35px; height: 35px; border-radius: 50%; background: #C27A7A; border: 2px solid var(--gold);"></div>
+        <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Rosé Antigo</span>
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 35px; height: 35px; border-radius: 50%; background: #C65D45; border: 2px solid var(--gold);"></div>
+        <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Terracota</span>
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 35px; height: 35px; border-radius: 50%; background: #B68BAE; border: 2px solid var(--gold);"></div>
+        <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Malva</span>
+    </div>
 
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 35px; height: 35px; border-radius: 50%; background: #D2B48C; border: 2px solid var(--gold);"></div>
-            <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Areia</span>
-        </div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 35px; height: 35px; border-radius: 50%; background: #BCA7C1; border: 2px solid var(--gold);"></div>
+        <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Azul Serenity</span>
+    </div>
 
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 35px; height: 35px; border-radius: 50%; background: #A9A9A9; border: 2px solid var(--gold);"></div>
-            <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Cinza</span>
-        </div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 35px; height: 35px; border-radius: 50%; background: #BDB7B2; border: 2px solid var(--gold);"></div>
+        <span style="color: rgba(255,255,255,0.85); font-size: 0.9rem;">Cinza Claro</span>
     </div>
 </div>
-
+</div>
                         <p style="color: rgba(255,255,255,0.85); line-height: 1.7; font-style: italic; font-size: 1rem; border-top: 1px solid var(--gold); padding-top: 20px;">
                             O mais importante é se sentir bem para celebrar este momento conosco. ❤️
                         </p>
@@ -855,11 +865,11 @@ body.scroll-locked {
 
             <div class="glass-card" style="margin-top: 0;">
                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3s-3 1.34-3 3c0 .35.07.69.18 1H4c-1.11 0-2 .89-2 2v11c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg>
-                <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.2rem; margin-bottom: 10px;">Presentes</h2>
+                <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.2rem; margin-bottom: 10px;">Lista de Presentes</h2>
                 <p style="opacity: 0.8; margin-bottom: 30px; color:#fff; font-family: 'Inter', sans-serif;">Contribua com nossos projetos. Sua ajuda será bem-vinda!</p>
                 
                 <div style="display: flex; gap: 15px; width: 100%; flex-direction: column;">
-                    <button class="btn-main" onclick="openCustomModal('modal-presentes')"> Lista Virtual</button>
+                    <button class="btn-main" onclick="openCustomModal('modal-presentes')"> Acessar Lista</button>
                    
                 </div>
             </div>
@@ -937,7 +947,7 @@ body.scroll-locked {
     <div id="modal-dicas" class="custom-modal">
         <div class="modal-box">
             <button class="close-modal-btn" onclick="closeCustomModal('modal-dicas')">✕</button>
-            <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.8rem; margin-bottom: 20px;">Informações e Dicas da Região</h3>
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.8rem; margin-bottom: 20px;">Informações</h3>
             
             <div class="tab-header">
                 <button class="tab-btn active" onclick="switchTab(event, 'tab-espaco')">O Espaço</button>
@@ -1112,14 +1122,14 @@ body.scroll-locked {
 </div> </div> <div id="modal-presentes" class="custom-modal">
     <div class="modal-box">
         <button class="close-modal-btn" onclick="closeCustomModal('modal-presentes')">✕</button>
-        <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.8rem; margin-bottom: 10px; text-align: center;">Lista de Presentes Virtuais</h3>
+        <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.8rem; margin-bottom: 10px; text-align: center;"> Presentes</h3>
 <p style="color: rgba(255,255,255,0.7); text-align: center; margin-bottom: 25px; font-size: 0.9rem;">Sua presença é nosso maior presente, mas se desejar contribuir com nossa jornada, escolha um item abaixo.</p>
 
 
 
 <div class="gift-filters">
     <button class="filter-btn active" onclick="filterGifts('todos', this)">Todos</button>
-    <button class="filter-btn" onclick="filterGifts('cota', this)">Presentes em Cotas</button>
+    <button class="filter-btn" onclick="filterGifts('cota', this)">Em Cotas</button>
     <button class="filter-btn" onclick="filterGifts('individual', this)">Individuais</button>
 </div>
 
@@ -1129,14 +1139,15 @@ body.scroll-locked {
         <div class="gift-img" style="background-image: url('img/geladeira.webp');"></div>
         <div class="gift-info">
             <h4>Geladeira inox (Frost Free / Inverse)</h4>
-            <p>Valor total aproximado: R$ 4.000,00</p>
+            <p>Valor total aproximado: R$ 4.450,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
-                <button class="btn-gift pago">Cota (Paga) <span>R$ 550</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 600</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 750</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 800</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 900</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Geladeira', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406400.005802BR5901N6001C62200516Geladeirainoxc0163046FEB','00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406400.005802BR5901N6001C62200516Geladeirainoxc0163046FEB')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift pago">Cota (Paga) <span>R$ 400</span></button>
+                
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Geladeira', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406600.005802BR5901N6001C62200516Geladeirainoxc0363040F84','00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406600.005802BR5901N6001C62200516Geladeirainoxc0363040F84')">Cota <span>R$ 600</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Geladeira', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406600.005802BR5901N6001C62200516Geladeirainoxc0463046850','00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406600.005802BR5901N6001C62200516Geladeirainoxc0463046850')">Cota <span>R$ 600</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Geladeira', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406950.005802BR5901N6001C62200516Geladeirainoxc0563044645','00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406950.005802BR5901N6001C62200516Geladeirainoxc0563044645')">Cota <span>R$ 950</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Geladeira', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B552198103850352040000530398654071500.005802BR5901N6001C62200516Geladeirainoxc066304DCAE','00020126360014BR.GOV.BCB.PIX0114+552198103850352040000530398654071500.005802BR5901N6001C62200516Geladeirainoxc066304DCAE')">Cota <span>R$ 1500</span></button>
             </div>
         </div>
     </div>
@@ -1147,11 +1158,10 @@ body.scroll-locked {
             <h4>Máquina de lavar roupa (14kg)</h4>
             <p>Valor total aproximado: R$ 2.500,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 600</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 700</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Lavadora', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62210517Maquinadelavarc016304BE26','00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62210517Maquinadelavarc016304BE26')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Lavadora', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62210517Maquinadelavarc02630450F4','00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62210517Maquinadelavarc02630450F4')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Lavadora', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406600.005802BR5901N6001C62210517Maquinadelavarc036304BF3B','00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406600.005802BR5901N6001C62210517Maquinadelavarc036304BF3B')">Cota <span>R$ 600</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Lavadora', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B552198103850352040000530398654071300.005802BR5901N6001C62210517Maquinadelavarc046304C3FB','00020126360014BR.GOV.BCB.PIX0114+552198103850352040000530398654071300.005802BR5901N6001C62210517Maquinadelavarc046304C3FB')">Cota <span>R$ 1300</span></button>
             </div>
         </div>
     </div>
@@ -1160,14 +1170,13 @@ body.scroll-locked {
         <div class="gift-img" style="background-image: url('img/lava-louca.webp');"></div>
         <div class="gift-info">
             <h4>Máquina de lavar louça inox</h4>
-            <p>Valor total aproximado: R$ 3.000,00</p>
+            <p>Valor total aproximado: R$ 3.300,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 600</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 600</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Lava-louça', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406400.005802BR5901N6001C62210517Maquinadeloucac016304A24D', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406400.005802BR5901N6001C62210517Maquinadeloucac016304A24D')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Lava-louça', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406400.005802BR5901N6001C62210517Maquinadeloucac0263044C9F', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406400.005802BR5901N6001C62210517Maquinadeloucac0263044C9F')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Lava-louça', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406650.005802BR5901N6001C62210517Maquinadeloucac0363043586', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406650.005802BR5901N6001C62210517Maquinadeloucac0363043586')">Cota <span>R$ 650</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Lava-louça', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406650.005802BR5901N6001C62210517Maquinadeloucac0463045252', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406650.005802BR5901N6001C62210517Maquinadeloucac0463045252')">Cota <span>R$ 650</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Lava-louça', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B552198103850352040000530398654071200.005802BR5901N6001C62210517Maquinadeloucac056304FCCA', '00020126360014BR.GOV.BCB.PIX0114+552198103850352040000530398654071200.005802BR5901N6001C62210517Maquinadeloucac056304FCCA')">Cota <span>R$ 1200</span></button>
             </div>
         </div>
     </div>
@@ -1176,12 +1185,12 @@ body.scroll-locked {
         <div class="gift-img" style="background-image: url('img/tv.webp');"></div>
         <div class="gift-info">
             <h4>Televisão Smart 55”</h4>
-            <p>Valor total aproximado: R$ 2.500,00</p>
+            <p>Valor total aproximado: R$ 2.400,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 600</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 1.200</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota TV 55', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62210517TelevisaoSmartc01630470D7', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62210517TelevisaoSmartc01630470D7')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota TV 55', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406400.005802BR5901N6001C62210517TelevisaoSmartc026304537D', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406400.005802BR5901N6001C62210517TelevisaoSmartc026304537D')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota TV 55', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406600.005802BR5901N6001C62210517TelevisaoSmartc03630471CA', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406600.005802BR5901N6001C62210517TelevisaoSmartc03630471CA')">Cota <span>R$ 600</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota TV 55', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B552198103850352040000530398654071100.005802BR5901N6001C62210517TelevisaoSmartc04630485EC', '00020126360014BR.GOV.BCB.PIX0114+552198103850352040000530398654071100.005802BR5901N6001C62210517TelevisaoSmartc04630485EC')">Cota <span>R$ 1.100</span></button>
             </div>
         </div>
     </div>
@@ -1192,10 +1201,10 @@ body.scroll-locked {
             <h4>Robô aspirador</h4>
             <p>Valor total aproximado: R$ 1.500,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 200</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Robô Aspirador', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406200.005802BR5901N6001C62200516Roboaspiradorc0163040358', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406200.005802BR5901N6001C62200516Roboaspiradorc0163040358')">Cota <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Robô Aspirador', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62200516Roboaspiradorc026304FFFC', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62200516Roboaspiradorc026304FFFC')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Robô Aspirador', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406500.005802BR5901N6001C62200516Roboaspiradorc0363043899', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406500.005802BR5901N6001C62200516Roboaspiradorc0363043899')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Robô Aspirador', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406500.005802BR5901N6001C62200516Roboaspiradorc0463045F4D', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406500.005802BR5901N6001C62200516Roboaspiradorc0463045F4D')">Cota <span>R$ 500</span></button>
             </div>
         </div>
     </div>
@@ -1206,9 +1215,9 @@ body.scroll-locked {
             <h4>Aspirador sem fio</h4>
             <p>Valor total aproximado: R$ 1.000,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 200</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Aspirador', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406200.005802BR5901N6001C62220518Aspiradorsemfioc016304EAD6', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406200.005802BR5901N6001C62220518Aspiradorsemfioc016304EAD6')">Cota <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Aspirador', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62220518Aspiradorsemfioc0263047F44', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62220518Aspiradorsemfioc0263047F44')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Aspirador', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406500.005802BR5901N6001C62220518Aspiradorsemfioc036304DEB4', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406500.005802BR5901N6001C62220518Aspiradorsemfioc036304DEB4')">Cota <span>R$ 500</span></button>
             </div>
         </div>
     </div>
@@ -1219,9 +1228,9 @@ body.scroll-locked {
             <h4>Fogão inox 5 bocas</h4>
             <p>Valor total aproximado: R$ 1.500,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 800</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Fogão', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62160512Fogaoinoxc0163049225', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62160512Fogaoinoxc0163049225')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Fogão', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406400.005802BR5901N6001C62160512Fogaoinoxc026304167B', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406400.005802BR5901N6001C62160512Fogaoinoxc026304167B')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Fogão', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406800.005802BR5901N6001C62160512Fogaoinoxc03630428E1', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406800.005802BR5901N6001C62160512Fogaoinoxc03630428E1')">Cota <span>R$ 800</span></button>
             </div>
         </div>
     </div>
@@ -1232,9 +1241,9 @@ body.scroll-locked {
             <h4>Forno elétrico inox</h4>
             <p>Valor total aproximado: R$ 1.000,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Forno', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62200516Fornoeletricoc016304A9BF', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62200516Fornoeletricoc016304A9BF')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Forno', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62200516Fornoeletricoc026304476D', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62200516Fornoeletricoc026304476D')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Forno', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406400.005802BR5901N6001C62200516Fornoeletricoc036304927E', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406400.005802BR5901N6001C62200516Fornoeletricoc036304927E')">Cota <span>R$ 400</span></button>
             </div>
         </div>
     </div>
@@ -1243,11 +1252,11 @@ body.scroll-locked {
         <div class="gift-img" style="background-image: url('img/microondas.webp');"></div>
         <div class="gift-info">
             <h4>Micro-ondas inox</h4>
-            <p>Valor total aproximado: R$ 750,00</p>
+            <p>Valor total aproximado: R$ 900,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 250</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 250</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 250</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Micro-ondas', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406250.005802BR5901N6001C62170513Microondasc016304488F', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406250.005802BR5901N6001C62170513Microondasc016304488F')">Cota <span>R$ 250</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Micro-ondas', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406250.005802BR5901N6001C62170513Microondasc026304A65D', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406250.005802BR5901N6001C62170513Microondasc026304A65D')">Cota <span>R$ 250</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Micro-ondas', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406400.005802BR5901N6001C62170513Microondasc036304AB5D', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406400.005802BR5901N6001C62170513Microondasc036304AB5D')">Cota <span>R$ 400</span></button>
             </div>
         </div>
     </div>
@@ -1256,11 +1265,11 @@ body.scroll-locked {
         <div class="gift-img" style="background-image: url('img/airfryer.webp');"></div>
         <div class="gift-info">
             <h4>Airfryer inox (grande)</h4>
-            <p>Valor total aproximado: R$ 600,00</p>
+            <p>Valor total aproximado: R$ 750,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 200</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 200</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Airfryer', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406200.005802BR5901N6001C62190515Airfryerinoxc0163045F63', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406200.005802BR5901N6001C62190515Airfryerinoxc0163045F63')">Cota <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Airfryer', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406200.005802BR5901N6001C62190515Airfryerinoxc026304B1B1', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406200.005802BR5901N6001C62190515Airfryerinoxc026304B1B1')">Cota <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Airfryer', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406350.005802BR5901N6001C62190515Airfryerinoxc036304D782', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406350.005802BR5901N6001C62190515Airfryerinoxc036304D782')">Cota <span>R$ 350</span></button>
             </div>
         </div>
     </div>
@@ -1271,9 +1280,9 @@ body.scroll-locked {
             <h4>Máquina de café (espresso)</h4>
             <p>Valor total aproximado: R$ 1.200,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 400</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Máquina Café', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62200516Maquinadecafec016304AF15', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62200516Maquinadecafec016304AF15')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Máquina Café', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406400.005802BR5901N6001C62200516Maquinadecafec0263043E85', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406400.005802BR5901N6001C62200516Maquinadecafec0263043E85')">Cota <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Máquina Café', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406500.005802BR5901N6001C62200516Maquinadecafec03630486A2', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406500.005802BR5901N6001C62200516Maquinadecafec03630486A2')">Cota <span>R$ 500</span></button>
             </div>
         </div>
     </div>
@@ -1282,10 +1291,10 @@ body.scroll-locked {
         <div class="gift-img" style="background-image: url('img/multiprocessador.webp');"></div>
         <div class="gift-info">
             <h4>Multiprocessador (completo)</h4>
-            <p>Valor total aproximado: R$ 600,00</p>
+            <p>Valor total aproximado: R$ 750,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Multiprocessador', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62230519Multiprocessadorc0163044EC4', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62230519Multiprocessadorc0163044EC4')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Multiprocessador', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406450.005802BR5901N6001C62230519Multiprocessadorc026304B9E0', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406450.005802BR5901N6001C62230519Multiprocessadorc026304B9E0')">Cota <span>R$ 450</span></button>
             </div>
         </div>
     </div>
@@ -1296,8 +1305,8 @@ body.scroll-locked {
             <h4>Batedeira planetária</h4>
             <p>Valor total aproximado: R$ 700,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 350</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 350</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Batedeira', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406350.005802BR5901N6001C62160512Batedeirac0163048198', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406350.005802BR5901N6001C62160512Batedeirac0163048198')">Cota <span>R$ 350</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Batedeira', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406350.005802BR5901N6001C62160512Batedeirac0263046F4A', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406350.005802BR5901N6001C62160512Batedeirac0263046F4A')">Cota <span>R$ 350</span></button>
             </div>
         </div>
     </div>
@@ -1308,8 +1317,8 @@ body.scroll-locked {
             <h4>Jogo de panelas premium</h4>
             <p>Valor total aproximado: R$ 1.000,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Jogo Panelas', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406500.005802BR5901N6001C62200516Jogodepanelasc0163041FAF', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406500.005802BR5901N6001C62200516Jogodepanelasc0163041FAF')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Jogo Panelas', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406500.005802BR5901N6001C62200516Jogodepanelasc026304F17D', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406500.005802BR5901N6001C62200516Jogodepanelasc026304F17D')">Cota <span>R$ 500</span></button>
             </div>
         </div>
     </div>
@@ -1318,10 +1327,12 @@ body.scroll-locked {
         <div class="gift-img" style="background-image: url('img/coifa.webp');"></div>
         <div class="gift-info">
             <h4>Coifa inox</h4>
-            <p>Valor total aproximado: R$ 1.000,00</p>
+            <p>Valor total aproximado: R$ 2.500,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Coifa Inox', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62160512Coifainoxc0163048041', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62160512Coifainoxc0163048041')">Cota <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Coifa Inox', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406500.005802BR5901N6001C62160512Coifainoxc026304ACE6', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406500.005802BR5901N6001C62160512Coifainoxc026304ACE6')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Coifa Inox', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406500.005802BR5901N6001C62160512Coifainoxc03630406B7', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406500.005802BR5901N6001C62160512Coifainoxc03630406B7')">Cota <span>R$ 500</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Coifa Inox', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B552198103850352040000530398654071200.005802BR5901N6001C62160512Coifainoxc046304ED3F', '00020126360014BR.GOV.BCB.PIX0114+552198103850352040000530398654071200.005802BR5901N6001C62160512Coifainoxc046304ED3F')">Cota <span>R$ 1200</span></button>
             </div>
         </div>
     </div>
@@ -1332,18 +1343,18 @@ body.scroll-locked {
             <h4>Liquidificador inox</h4>
             <p>R$ 250,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 250</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Liquidificador Inox', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406250.005802BR5901N6001C62210517Liquidificadorc0163046DA0', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406250.005802BR5901N6001C62210517Liquidificadorc0163046DA0')">Presentear <span>R$ 250</span></button>
             </div>
         </div>
     </div>
 
     <div class="gift-item" data-category="individual">
-        <div class="gift-img" style="background-image: url('img/liq-portatil.webp');"></div>
+        <div class="gift-img" style="background-image: url('img/liquiportatil.webp');"></div>
         <div class="gift-info">
             <h4>Liquidificador portátil</h4>
             <p>R$ 150,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 150</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Liquidificador Portátil', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406150.005802BR5901N6001C62200516Liquiportatilc0163048398', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406150.005802BR5901N6001C62200516Liquiportatilc0163048398')">Presentear <span>R$ 150</span></button>
             </div>
         </div>
     </div>
@@ -1354,7 +1365,7 @@ body.scroll-locked {
             <h4>Mixer inox (3 em 1)</h4>
             <p>R$ 250,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 250</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Mixer Inox', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406250.005802BR5901N6001C62160512Mixerinoxc016304DBDD', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406250.005802BR5901N6001C62160512Mixerinoxc016304DBDD')">Presentear <span>R$ 250</span></button>
             </div>
         </div>
     </div>
@@ -1365,7 +1376,7 @@ body.scroll-locked {
             <h4>Chaleira elétrica inox</h4>
             <p>R$ 200,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Chaleira Elétrica', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406200.005802BR5901N6001C62150511Chaleirac016304B9FA', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406200.005802BR5901N6001C62150511Chaleirac016304B9FA')">Presentear <span>R$ 200</span></button>
             </div>
         </div>
     </div>
@@ -1376,7 +1387,7 @@ body.scroll-locked {
             <h4>Cafeteira inox (tradicional)</h4>
             <p>R$ 250,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 250</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Cafeteira Inox', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406250.005802BR5901N6001C62160512Cafeteirac0163048620', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406250.005802BR5901N6001C62160512Cafeteirac0163048620')">Presentear <span>R$ 250</span></button>
             </div>
         </div>
     </div>
@@ -1387,29 +1398,29 @@ body.scroll-locked {
             <h4>Sanduicheira inox</h4>
             <p>R$ 150,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 150</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Sanduicheira Inox', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406150.005802BR5901N6001C62190515Sanduicheirac016304936F', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406150.005802BR5901N6001C62190515Sanduicheirac016304936F')">Presentear <span>R$ 150</span></button>
             </div>
         </div>
     </div>
 
     <div class="gift-item" data-category="individual">
-        <div class="gift-img" style="background-image: url('img/ninja-creami.webp');"></div>
+        <div class="gift-img" style="background-image: url('img/sorveteira.webp');"></div>
         <div class="gift-info">
             <h4>Máquina de sorvete (Ninja Creami)</h4>
             <p>R$ 700,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 700</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Máquina Ninja Creami', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406700.005802BR5901N6001C62210517Maquinasorvetec0163042827', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406700.005802BR5901N6001C62210517Maquinasorvetec0163042827')">Presentear <span>R$ 700</span></button>
             </div>
         </div>
     </div>
 
     <div class="gift-item" data-category="individual">
-        <div class="gift-img" style="background-image: url('img/filtro.webp');"></div>
+        <div class="gift-img" style="background-image: url('img/filtroagua.webp');"></div>
         <div class="gift-info">
             <h4>Filtro de água</h4>
             <p>R$ 200,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Filtro de Água', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406200.005802BR5901N6001C62170513Filtroaguac0163049B8C', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406200.005802BR5901N6001C62170513Filtroaguac0163049B8C')">Presentear <span>R$ 200</span></button>
             </div>
         </div>
     </div>
@@ -1420,18 +1431,18 @@ body.scroll-locked {
             <h4>Faqueiro inox (24–30 peças)</h4>
             <p>R$ 300,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Faqueiro Inox', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62150511Faqueiroc0163046FB5', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62150511Faqueiroc0163046FB5')">Presentear <span>R$ 300</span></button>
             </div>
         </div>
     </div>
 
     <div class="gift-item" data-category="individual">
-        <div class="gift-img" style="background-image: url('img/jantar.webp');"></div>
+        <div class="gift-img" style="background-image: url('img/aparelhojantar.webp');"></div>
         <div class="gift-info">
             <h4>Aparelho de jantar branco</h4>
             <p>R$ 400,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 400</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Aparelho de Jantar', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406400.005802BR5901N6001C62210517Aparelhojantarc016304AF99', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406400.005802BR5901N6001C62210517Aparelhojantarc016304AF99')">Presentear <span>R$ 400</span></button>
             </div>
         </div>
     </div>
@@ -1439,46 +1450,36 @@ body.scroll-locked {
     <div class="gift-item" data-category="individual">
         <div class="gift-img" style="background-image: url('img/edredom.webp');"></div>
         <div class="gift-info">
-            <h4>Edredom branco (casal/queen)</h4>
-            <p>R$ 250,00</p>
+            <h4>Edredom (queen)</h4>
+            <p>R$ 650,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 250</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Edredom Queen', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406650.005802BR5901N6001C62190515Edredomqueenc016304FE3F', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406650.005802BR5901N6001C62190515Edredomqueenc016304FE3F')">Presentear <span>R$ 650</span></button>
             </div>
         </div>
     </div>
 
     <div class="gift-item" data-category="individual">
-        <div class="gift-img" style="background-image: url('img/lençol.webp');"></div>
+        <div class="gift-img" style="background-image: url('img/jogolencol.webp');"></div>
         <div class="gift-info">
             <h4>Jogo de lençol branco</h4>
             <p>R$ 200,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Jogo de Lençol', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406200.005802BR5901N6001C62170513Jogolencolc016304B833', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406200.005802BR5901N6001C62170513Jogolencolc016304B833')">Presentear <span>R$ 200</span></button>
             </div>
         </div>
     </div>
 
     <div class="gift-item" data-category="individual">
-        <div class="gift-img" style="background-image: url('img/cama-completo.webp');"></div>
+        <div class="gift-img" style="background-image: url('img/jogocama.webp');"></div>
         <div class="gift-info">
             <h4>Jogo de cama branco completo</h4>
             <p>R$ 300,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 300</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Jogo Cama Completo', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406300.005802BR5901N6001C62150511Jogocamac0163046E87', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406300.005802BR5901N6001C62150511Jogocamac0163046E87')">Presentear <span>R$ 300</span></button>
             </div>
         </div>
     </div>
 
-    <div class="gift-item" data-category="individual">
-        <div class="gift-img" style="background-image: url('img/travesseiro.webp');"></div>
-        <div class="gift-info">
-            <h4>Travesseiros (par)</h4>
-            <p>R$ 100,00</p>
-            <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 100</span></button>
-            </div>
-        </div>
-    </div>
 
     <div class="gift-item" data-category="individual">
         <div class="gift-img" style="background-image: url('img/toalhas.webp');"></div>
@@ -1486,7 +1487,7 @@ body.scroll-locked {
             <h4>Jogo de toalhas branco</h4>
             <p>R$ 200,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="openCustomModal('modal-pix')">Presentear <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Jogo de Toalhas', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406200.005802BR5901N6001C62180514Jogotoalhasc016304182D', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406200.005802BR5901N6001C62180514Jogotoalhasc016304182D')">Presentear <span>R$ 200</span></button>
             </div>
         </div>
     </div>
@@ -1497,7 +1498,7 @@ body.scroll-locked {
             <h4>Ferro de passar a vapor</h4>
             <p>R$ 200,00</p>
             <div class="cota-grid">
-                <button class="btn-gift" onclick="preencherEAbrirModal('Cota Jantar Romântico', 'url_do_qr_jantar.png', 'codigo_pix_longo_do_jantar_aqui')">Presentear <span>R$ 200</span></button>
+                <button class="btn-gift" onclick="preencherEAbrirModal('Ferro de Passar', 'https://quickchart.io/qr?text=00020126360014BR.GOV.BCB.PIX0114%2B55219810385035204000053039865406200.005802BR5901N6001C62180514Ferropassarc016304695A', '00020126360014BR.GOV.BCB.PIX0114+55219810385035204000053039865406200.005802BR5901N6001C62180514Ferropassarc016304695A')">Presentear <span>R$ 200</span></button>
             </div>
         </div>
     </div>
