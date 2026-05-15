@@ -233,7 +233,7 @@ body.scroll-locked {
 .custom-modal.active { opacity: 1; pointer-events: auto; }
 .modal-box { background: #111; border: 1px solid var(--gold); border-radius: 20px; width: 100%; max-width: 600px; padding: 30px; position: relative; max-height: 90vh; overflow-y: auto; text-align: left; }
 .close-modal-btn { position: absolute; top: 15px; right: 15px; background: transparent; color: #fff; border: none; font-size: 1.5rem; cursor: pointer; }
-.tab-header { display: flex; border-bottom: 1px solid var(--glass-border); margin-bottom: 20px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; -ms-overflow-style: none; justify-content: flex-start; padding-bottom: 2px;}
+.tab-header { display: flex; overflow-x: auto; white-space: nowrap; scrollbar-width: none; -ms-overflow-style: none; border-bottom: 1px solid var(--glass-border); margin-bottom: 20px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; -ms-overflow-style: none; justify-content: flex-start; padding-bottom: 2px;}
 .tab-header::-webkit-scrollbar {display: none;}
 .tab-btn { flex: 0 0 auto; background: none; border: none; color: #fff; padding: 10px; cursor: pointer; opacity: 0.5; transition: 0.3s; font-size: 0.9rem; }
 .tab-btn.active { opacity: 1; border-bottom: 2px solid var(--gold); color: var(--gold); font-weight: bold;}
@@ -589,13 +589,13 @@ body.scroll-locked {
                         <h2 class="section-title">A Jornada</h2>
                         <p class="section-subtitle">Do início ao "Minha mulher é tão bonita que sei que sou engraçado!" 😍</p>
                         <div class="photo-stack" id="journey-stack">
-                            <div class="stacked-card" data-card="1"><img src="jornada01.webp" loading="lazy" alt="1"><div class="card-caption"><h3>O Início</h3></div></div>
-                            <div class="stacked-card" data-card="2"><img src="jornada02.webp" loading="lazy" alt="2"><div class="card-caption"><h3>Viagens</h3></div></div>
-                            <div class="stacked-card" data-card="3"><img src="jornada03.webp" loading="lazy" alt="3"><div class="card-caption"><h3>Risadas</h3></div></div>
-                            <div class="stacked-card" data-card="4"><img src="jornada04.webp" loading="lazy" alt="4"><div class="card-caption"><h3>Parceria</h3></div></div>
-                            <div class="stacked-card" data-card="5"><img src="jornada05.webp" loading="lazy" alt="5"><div class="card-caption"><h3>Conquistas</h3></div></div>
-                            <div class="stacked-card" data-card="6"><img src="jornada06.webp" loading="lazy" alt="6"><div class="card-caption"><h3>Lar</h3></div></div>
-                            <div class="stacked-card" data-card="7"><img src="jornada07.webp" loading="lazy" alt="7"><div class="card-caption" id="cards-end"><h3>Família</h3></div></div>
+                            <div class="stacked-card" data-card="1"><img src="jornada01.webp" alt="1"><div class="card-caption"><h3>O Início</h3></div></div>
+                            <div class="stacked-card" data-card="2"><img src="jornada02.webp" alt="2"><div class="card-caption"><h3>Viagens</h3></div></div>
+                            <div class="stacked-card" data-card="3"><img src="jornada03.webp" alt="3"><div class="card-caption"><h3>Risadas</h3></div></div>
+                            <div class="stacked-card" data-card="4"><img src="jornada04.webp" alt="4"><div class="card-caption"><h3>Parceria</h3></div></div>
+                            <div class="stacked-card" data-card="5"><img src="jornada05.webp" alt="5"><div class="card-caption"><h3>Conquistas</h3></div></div>
+                            <div class="stacked-card" data-card="6"><img src="jornada06.webp" alt="6"><div class="card-caption"><h3>Lar</h3></div></div>
+                            <div class="stacked-card" data-card="7"><img src="jornada07.webp" alt="7"><div class="card-caption" id="cards-end"><h3>Família</h3></div></div>
                         </div>
                     </div>
                      <button id="btn-journey-gallery" class="btn-secondary" onclick="openJourneyModal()" style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 50; opacity: 0; transition: opacity 0.5s ease; pointer-events: none; width: auto; padding: 10px 25px; bottom: 11%;">
@@ -607,10 +607,10 @@ body.scroll-locked {
 
         <section class="scroll-section" id="proposal" style="position: relative; height: 400vh; background-color: #000;">
             <div class="sticky-wrapper" style="position: sticky; top: 0; width: 100%; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                <img src="pedido001.webp" loading="lazy" class="proposal-bg-layer" id="bg-prop-1" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 1; transition: opacity 0.8s ease; z-index: 1; pointer-events: none;" alt="Fundo 1">
-                <img src="pedido002.webp" loading="lazy" class="proposal-bg-layer" id="bg-prop-2" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; z-index: 1; pointer-events: none;" alt="Fundo 2">
-                <img src="pedido003.webp" loading="lazy" class="proposal-bg-layer" id="bg-prop-3" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; z-index: 1; pointer-events: none;" alt="Fundo 3">
-                <img src="pedido004.webp" loading="lazy" class="proposal-bg-layer" id="bg-prop-4" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; z-index: 1; pointer-events: none;" alt="Fundo 4">
+                <img src="pedido001.webp" class="proposal-bg-layer" id="bg-prop-1" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 1; transition: opacity 0.8s ease; z-index: 1; pointer-events: none;" alt="Fundo 1">
+                <img src="pedido002.webp" class="proposal-bg-layer" id="bg-prop-2" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; z-index: 1; pointer-events: none;" alt="Fundo 2">
+                <img src="pedido003.webp" class="proposal-bg-layer" id="bg-prop-3" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; z-index: 1; pointer-events: none;" alt="Fundo 3">
+                <img src="pedido004.webp" class="proposal-bg-layer" id="bg-prop-4" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; z-index: 1; pointer-events: none;" alt="Fundo 4">
                 <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.6); z-index: 5; pointer-events: none;"></div>
 
                 <div style="position: relative; z-index: 10; width: 100%; height: 100%;">
@@ -967,7 +967,7 @@ body.scroll-locked {
     <div id="journey-gallery-modal" class="pw-modal">
         <span class="close-pw-modal" onclick="closeJourneyModal()">✕ Fechar Galeria</span>
         <div class="pw-modal-content">
-            <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.2rem; margin-bottom: 30px; text-align: center;">Nossa História em Fotos</h2>
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.2rem; margin-bottom: 30px; text-align: center;">Nossa História</h2>
             
             <div class="pw-grid">
                 <div class="pw-item">
