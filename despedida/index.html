@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>OPERAÇÃO: O ÚLTIMO COMBATE // 25/09</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Teko:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <style>
+    :root {
+      --cod-black: #060709;
+      --cod-dark-grey: #0e1117;
+      --cod-surface: #141923;
+      --cod-yellow: #fecb00;
+      --cod-yellow-hover: #ffd933;
+      --cod-yellow-glow: rgba(254, 203, 0, 0.3);
+      --cod-border: #232a38;
+      --cod-border-accent: rgba(254, 203, 0, 0.4);
+      --text-main: #f0f2f5;
+      --text-muted: #8c97a8;
+      --wa-green: #25d366;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background-color: var(--cod-black);
+      color: var(--text-main);
+      line-height: 1.5;
+      overflow-x: hidden;
+      width: 100%;
+      background-image: 
+        radial-gradient(rgba(254, 203, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(0, 0, 0, 0.8) 0%, var(--cod-black) 100%);
+      background-size: 28px 28px, 100% 100%;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Teko', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      line-height: 0.95;
+    }
+
+    .font-hud {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 0 24px;
+      }
+    }
+
+    .cod-panel {
+      position: relative;
+      background: rgba(14, 17, 23, 0.92);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--cod-border);
+      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    }
+
+    .cod-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 24px;
+      height: 3px;
+      background: var(--cod-yellow);
+    }
+
+    .btn-cod-yellow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--cod-yellow);
+      color: #000000;
+      font-family: 'Teko', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      text-decoration: none;
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      transition: all 0.25s ease;
+      box-shadow: 0 0 20px var(--cod-yellow-glow);
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    @media (min-width: 768px) {
+      .btn-cod-yellow {
+        width: auto;
+        font-size: 1.5rem;
+        padding: 12px 36px;
+      }
+    }
+
+    .btn-cod-yellow:hover {
+      background: #ffffff;
+      color: #000000;
+      transform: translateY(-2px);
+    }
+
+    .btn-cod-yellow i {
+      font-size: 1.4rem;
+    }
+
+    .cod-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: rgba(254, 203, 0, 0.12);
+      color: var(--cod-yellow);
+      border-left: 3px solid var(--cod-yellow);
+      border-top: 1px solid rgba(254, 203, 0, 0.2);
+      border-right: 1px solid rgba(254, 203, 0, 0.2);
+      border-bottom: 1px solid rgba(254, 203, 0, 0.2);
+      width: fit-content;
+      max-width: fit-content;
+      align-self: flex-start;
+    }
+
+    /* ================= SCROLL 1: HERO ================= */
+    .scroll-1-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 70px 0 50px;
+      border-bottom: 2px solid var(--cod-border);
+      background: 
+        linear-gradient(to bottom, rgba(6, 7, 9, 0.92) 0%, rgba(6, 7, 9, 0.78) 50%, rgba(6, 7, 9, 0.95) 100%),
+        url('https://plus.unsplash.com/premium_photo-1716078137428-aabec80b2c34?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    @media (min-width: 992px) {
+      .scroll-1-hero {
+        padding: 100px 0 70px;
+      }
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 40px;
+      }
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      align-items: center;
+    }
+
+    @media (min-width: 992px) {
+      .hero-content {
+        text-align: left;
+        align-items: flex-start;
+      }
+    }
+
+    .hero-subtitle-top {
+      font-size: 0.85rem;
+      color: var(--cod-yellow);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 11vw, 5.8rem);
+      line-height: 0.88;
+      color: #ffffff;
+      word-break: break-word;
+    }
+
+    .hero-title span {
+      color: var(--cod-yellow);
+      text-shadow: 0 0 25px var(--cod-yellow-glow);
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      max-width: 540px;
+    }
+
+    @media (min-width: 768px) {
+      .hero-desc {
+        font-size: 1.1rem;
+      }
+    }
+
+    .hero-intel-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 12px 14px;
+      background: rgba(14, 17, 23, 0.85);
+      border: 1px solid var(--cod-border);
+      border-left: 3px solid var(--cod-yellow);
+      width: 100%;
+      max-width: 420px;
+      text-align: left;
+    }
+
+    .intel-strip-item span {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--cod-yellow);
+      letter-spacing: 1px;
+    }
+
+    .intel-strip-item strong {
+      font-size: 0.95rem;
+      color: #ffffff;
+    }
+
+    .hero-btn-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    @media (min-width: 992px) {
+      .hero-btn-container {
+        justify-content: flex-start;
+      }
+    }
+
+    .video-frame-cod {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      background: #020304;
+      border: 1px solid var(--cod-border-accent);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      overflow: hidden;
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    }
+
+    @media (min-width: 992px) {
+      .video-frame-cod {
+        max-width: 360px;
+      }
+    }
+
+    .hud-tag {
+      position: absolute;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--cod-yellow);
+      background: rgba(6, 7, 9, 0.88);
+      padding: 3px 8px;
+      border: 1px solid var(--cod-border);
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+    .hud-tl { top: 8px; left: 8px; }
+    .hud-tr { top: 8px; right: 8px; color: #ff4444; }
+    .hud-bl { bottom: 8px; left: 8px; color: var(--text-muted); }
+    .hud-br { bottom: 8px; right: 8px; }
+
+    .section-header {
+      margin-bottom: 30px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2.2rem, 7vw, 3.8rem);
+      color: #fff;
+      margin-top: 8px;
+    }
+
+    .section-header h2 span {
+      color: var(--cod-yellow);
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      max-width: 700px;
+    }
+
+    /* ================= SCROLL 2: FASES ================= */
+    .scroll-2-phases {
+      padding: 70px 0;
+      background: var(--cod-black);
+      border-bottom: 2px solid var(--cod-border);
+    }
+
+    @media (min-width: 768px) {
+      .scroll-2-phases {
+        padding: 95px 0;
+      }
+    }
+
+    .stages-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 992px) {
+      .stages-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+    }
+
+    .stage-card-cod {
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stage-card-cod.active-stage {
+      border-color: var(--cod-yellow);
+      background: linear-gradient(180deg, #181d28 0%, var(--cod-dark-grey) 100%);
+    }
+
+    .stage-tag {
+      color: var(--cod-yellow);
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .stage-card-cod h3 {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .stage-time-badge {
+      display: inline-block;
+      background: rgba(254, 203, 0, 0.15);
+      color: var(--cod-yellow);
+      border: 1px solid rgba(254, 203, 0, 0.3);
+      padding: 3px 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .stage-card-cod p {
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .stage-card-foot {
+      border-top: 1px solid var(--cod-border);
+      padding-top: 12px;
+      color: #c4ccd8;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stage-card-foot i {
+      color: var(--cod-yellow);
+      font-size: 1.1rem;
+    }
+
+    /* ================= SCROLL 3: CHURRASCO / BASE MILITAR ================= */
+    .scroll-3-churrasco {
+      padding: 70px 0;
+      background: 
+        linear-gradient(to right, rgba(6, 7, 9, 0.95) 0%, rgba(6, 7, 9, 0.82) 55%, rgba(6, 7, 9, 0.95) 100%),
+        url('https://plus.unsplash.com/premium_photo-1683133515999-6cc3f023c714?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?q=80&w=1920&auto=format&fit=crop') center/cover;
+      border-bottom: 2px solid var(--cod-border);
+    }
+
+    @media (min-width: 768px) {
+      .scroll-3-churrasco {
+        padding: 95px 0;
+      }
+    }
+
+    .churrasco-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    @media (min-width: 992px) {
+      .churrasco-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+    }
+
+    .churrasco-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .churrasco-points li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #d1d7e0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .churrasco-points li i {
+      color: var(--cod-yellow);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .dropzone-img-wrapper {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      border: 1px solid var(--cod-border-accent);
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    }
+
+    @media (min-width: 768px) {
+      .dropzone-img-wrapper {
+        height: 420px;
+      }
+    }
+
+    .dropzone-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(110%) brightness(95%);
+    }
+
+    .dropzone-label {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(6, 7, 9, 0.92);
+      border: 1px solid var(--cod-yellow);
+      padding: 6px 12px;
+      color: #fff;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    /* ================= SCROLL 4: RECONHECIMENTO DE TERRENO ================= */
+    .scroll-4-bars {
+      padding: 70px 0;
+      background: var(--cod-black);
+      border-bottom: 2px solid var(--cod-border);
+    }
+
+    @media (min-width: 768px) {
+      .scroll-4-bars {
+        padding: 95px 0;
+      }
+    }
+
+    .bars-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (min-width: 992px) {
+      .bars-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+    }
+
+    .recon-img-box {
+      height: 320px;
+      border: 1px solid var(--cod-border-accent);
+      position: relative;
+      background: #090c10;
+      overflow: hidden;
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    }
+
+    @media (min-width: 768px) {
+      .recon-img-box {
+        height: 420px;
+      }
+    }
+
+    .recon-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(110%) brightness(90%);
+    }
+
+    .bar-poi-item {
+      padding: 14px 16px;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .bar-poi-num {
+      width: 40px;
+      height: 40px;
+      background: rgba(254, 203, 0, 0.12);
+      border: 1px solid var(--cod-yellow);
+      color: var(--cod-yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Teko', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .bar-poi-info h4 {
+      font-size: 1.35rem;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .bar-poi-loc {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--cod-yellow);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ================= SCROLL 5: ATAQUE ÀS LINHAS INIMIGAS ================= */
+    .scroll-5-brava {
+      padding: 70px 0;
+      background: 
+        linear-gradient(to right, rgba(6, 7, 9, 0.94) 0%, rgba(6, 7, 9, 0.8) 50%, rgba(6, 7, 9, 0.94) 100%),
+        url('https://plus.unsplash.com/premium_photo-1716078137428-aabec80b2c34?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?q=80&w=1920&auto=format&fit=crop') center/cover fixed;
+      border-bottom: 2px solid var(--cod-border);
+    }
+
+    @media (min-width: 768px) {
+      .scroll-5-brava {
+        padding: 95px 0;
+      }
+    }
+
+    .brava-two-cols {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    @media (min-width: 992px) {
+      .brava-two-cols {
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 44px;
+      }
+    }
+
+    .brava-content-box {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .brava-title {
+      font-size: clamp(2.4rem, 7vw, 4.4rem);
+      color: #ffffff;
+      line-height: 0.9;
+    }
+
+    .brava-title span {
+      color: var(--cod-yellow);
+      text-shadow: 0 0 25px var(--cod-yellow-glow);
+    }
+
+    .brava-lead {
+      font-size: 1.05rem;
+      font-family: 'Inter', sans-serif;
+      color: #d8dee8;
+      line-height: 1.6;
+    }
+
+    .club-cod-card {
+      padding: 18px 20px;
+      width: 100%;
+    }
+
+    .club-type-tag {
+      font-size: 0.75rem;
+      color: var(--cod-yellow);
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .club-cod-card h4 {
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .club-cod-card p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .extraction-alert {
+      background: rgba(255, 68, 68, 0.1);
+      border: 1px solid rgba(255, 68, 68, 0.3);
+      border-left: 3px solid #ff4444;
+      padding: 12px 16px;
+      color: #ff9999;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .extraction-alert i {
+      font-size: 1.4rem;
+      color: #ff4444;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .brava-img-box {
+      position: relative;
+      height: 340px;
+      overflow: hidden;
+      border: 1px solid var(--cod-border-accent);
+      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    }
+
+    @media (min-width: 768px) {
+      .brava-img-box {
+        height: 440px;
+      }
+    }
+
+    .brava-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(110%) brightness(95%);
+    }
+
+    /* ================= SCROLL 6: ALISTAMENTO ================= */
+    .scroll-6-cta {
+      padding: 80px 0;
+      background: 
+        linear-gradient(180deg, var(--cod-black) 0%, rgba(20, 25, 35, 0.92) 100%),
+        url('https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?q=80&w=1920&auto=format&fit=crop') center/cover;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .scroll-6-cta {
+        padding: 110px 0;
+      }
+    }
+
+    .cta-cod-box {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      border-color: var(--cod-border-accent);
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.95);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .cta-cod-box {
+        padding: 60px 40px;
+      }
+    }
+
+    .cta-cod-box .cod-badge {
+      align-self: center;
+      margin-bottom: 14px;
+    }
+
+    .cta-cod-box h2 {
+      font-size: clamp(2.5rem, 8vw, 4.4rem);
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .cta-cod-box p {
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 28px;
+    }
+
+    @media (min-width: 768px) {
+      .cta-cod-box p {
+        font-size: 1.15rem;
+      }
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+      background: #040507;
+      border-top: 2px solid var(--cod-border);
+      padding: 45px 0 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-bottom: 30px;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand {
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer-brand {
+        text-align: left;
+      }
+    }
+
+    .footer-brand h4 {
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    /* Esconde colunas de links apenas no mobile */
+    .footer-col {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .footer-col {
+        display: block;
+      }
+      .footer-col h5 {
+        font-size: 1.1rem;
+        color: var(--cod-yellow);
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+      }
+      .footer-col ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .footer-col a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: color 0.2s;
+      }
+      .footer-col a:hover {
+        color: var(--cod-yellow);
+      }
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: #5d6778;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    .anim-cod {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .anim-cod.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SCROLL 1: O ÚLTIMO COMBATE -->
+  <section class="scroll-1-hero" id="scroll-1">
+    <div class="container">
+      <div class="hero-grid">
+        
+        <div class="hero-content">
+          <div class="hero-subtitle-top">
+            [ 01 // CLASSIFICADO ]
+          </div>
+          
+          <h1 class="hero-title">
+            O ÚLTIMO <span>COMBATE</span>
+          </h1>
+          
+          <p class="hero-desc">
+            Um homem nobre jamais foge à batalha! Você está sendo convocado para lutar por uma última vez ao lado de um valente soldado. Avante pelotão!
+          </p>
+
+          <div class="hero-intel-strip">
+            <div class="intel-strip-item">
+              <span>OPERAÇÃO</span>
+              <strong>25 DE SETEMBRO</strong>
+            </div>
+            <div class="intel-strip-item">
+              <span>ZONA DE COMBATE</span>
+              <strong>BC & PRAIA BRAVA</strong>
+            </div>
+          </div>
+
+          <div class="hero-btn-container">
+            <a href="https://wa.me/?text=Soldado%20se%20apresentando!%20Confirmando%20presen%C3%A7a%20na%20miss%C3%A3o%20O%20%C3%9Altimo%20Combate!" target="_blank" class="btn-cod-yellow">
+              <i class="ph ph-whatsapp-logo"></i> Alistar-se
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="video-frame-cod">
+            <span class="hud-tag hud-tl">[EQUIPMENT_HUD // HELMET_3D]</span>
+            <span class="hud-tag hud-tr">● LIVE_FEED</span>
+            
+            <div style="position:relative; width:100%; height:0px; padding-bottom:177.778%;">
+              <iframe allow="fullscreen" allowfullscreen height="100%" src="https://streamable.com/e/d9r5vo?loop=0" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;"></iframe>
+            </div>
+
+            <span class="hud-tag hud-bl">COORD: 26.9997° S, 48.6367° W</span>
+            <span class="hud-tag hud-br">STATUS: PRONTO</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SCROLL 2: FASES SEQUENCIAIS -->
+  <section class="scroll-2-phases" id="scroll-2">
+    <div class="container">
+      
+      <div class="section-header anim-cod">
+        <div class="cod-badge">
+          <i class="ph ph-path"></i> PLANO DE ATAQUE
+        </div>
+        <h2><span>FASES</span> DA INCURSÃO</h2>
+        <p>A progressão da batalha do entardecer ao combate noturno.</p>
+      </div>
+
+      <div class="stages-grid">
+        <div class="cod-panel stage-card-cod active-stage anim-cod">
+          <div>
+            <span class="stage-tag">[ESTÁGIO 01]</span>
+            <h3>Concentração</h3>
+            <div class="stage-time-badge">16:00 - 19:00</div>
+            <p>
+              Reunião estratégica para alimentação carnívora e calibragem alcoólica pré-combate.
+            </p>
+          </div>
+          <div class="stage-card-foot">
+            <i class="ph ph-map-pin"></i> Sítio do Paulo — Av. Arquipélago Encantado
+          </div>
+        </div>
+
+        <div class="cod-panel stage-card-cod anim-cod" style="transition-delay: 0.15s;">
+          <div>
+            <span class="stage-tag">[ESTÁGIO 02]</span>
+            <h3>Infiltração</h3>
+            <div class="stage-time-badge">19:30 - 23:00</div>
+            <p>
+              Desembarque na Barra Sul. Marcha pela Av. Atlântica por bares, com missões a cumprir.
+            </p>
+          </div>
+          <div class="stage-card-foot">
+            <i class="ph ph-map-pin"></i> Av. Atlântica, BC
+          </div>
+        </div>
+
+        <div class="cod-panel stage-card-cod anim-cod" style="transition-delay: 0.3s;">
+          <div>
+            <span class="stage-tag">[ESTÁGIO 03]</span>
+            <h3>Batalha Final</h3>
+            <div class="stage-time-badge">23:30 EM DIANTE</div>
+            <p>
+              Infiltração dos agentes em local não divulgado. Resistência final do pelotão antes do casamento.
+            </p>
+          </div>
+          <div class="stage-card-foot">
+            <i class="ph ph-speaker-hifi"></i> End. Secreto
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCROLL 3: PREPARAÇÃO ESTRATÉGICA (CHURRASCO) -->
+  <section class="scroll-3-churrasco" id="scroll-3">
+    <div class="container">
+      <div class="churrasco-grid">
+        
+        <div class="anim-cod">
+          <div class="cod-badge">
+            <i class="ph ph-flame"></i> CONCENTRAÇÃO
+          </div>
+          <h2 style="font-size: clamp(2.3rem, 6vw, 3.8rem); color: #fff; margin: 10px 0 14px;">
+            PREPARAÇÃO <span>ESTRATÉGICA</span>
+          </h2>
+          <p style="color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 1rem;">
+            Nenhum soldado entra em combate em jejum. Abastecimento da tropa para aumentar a resistência.
+          </p>
+
+          <ul class="churrasco-points">
+            <li>
+              <i class="ph ph-check-square-offset"></i>
+              <div><strong>Churrasco</strong></div>
+            </li>
+            <li>
+              <i class="ph ph-check-square-offset"></i>
+              <div><strong>Bebidas</strong></div>
+            </li>
+            <li>
+              <i class="ph ph-check-square-offset"></i>
+              <div><strong>Fardamento</strong></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="anim-cod">
+          <div class="dropzone-img-wrapper">
+            <img src="https://res.cloudinary.com/dabmzfood/image/upload/v1788703899/IMG_0190_hblwur.jpg" alt="Preparação Estratégica">
+            <div class="dropzone-label font-hud">
+              <i class="ph ph-map-pin" style="color: var(--cod-yellow);"></i> SÍTIO DO PAULO // 16:00
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SCROLL 4: RECONHECIMENTO DE TERRENO (IMAGEM + BARES) -->
+  <section class="scroll-4-bars" id="scroll-4">
+    <div class="container">
+      
+      <div class="section-header anim-cod">
+        <div class="cod-badge">
+          <i class="ph ph-map-trifold"></i> IDA AO FRONTE
+        </div>
+        <h2>RECONHECIMENTO <span>DE TERRENO</span></h2>
+        <p>Incursão ao fronte inimigo na orla de Bal. Camboriú passando por "postos de abastecimento".</p>
+      </div>
+
+      <div class="bars-grid">
+        
+        <div class="anim-cod">
+          <div class="recon-img-box">
+            <img src="https://res.cloudinary.com/dabmzfood/image/upload/v1788704253/IMG_0192_oyxcej.jpg?q=80&w=1200&auto=format&fit=crop" alt="Reconhecimento de Terreno">
+          </div>
+        </div>
+
+        <div class="anim-cod">
+          <div class="cod-panel bar-poi-item">
+            <div class="bar-poi-num">01</div>
+            <div class="bar-poi-info">
+              <h4>MARCHA PELOS BARES</h4>
+              <div class="bar-poi-loc"><i class="ph ph-map-pin"></i> AV. ATLÂNTICA</div>
+            </div>
+          </div>
+
+          <div class="cod-panel bar-poi-item">
+            <div class="bar-poi-num">02</div>
+            <div class="bar-poi-info">
+              <h4>PRINCÍPIO DE CONFUSÃO</h4>
+              <div class="bar-poi-loc"><i class="ph ph-map-pin"></i> AV. ATLÂNTICA</div>
+            </div>
+          </div>
+
+          <div class="cod-panel bar-poi-item">
+            <div class="bar-poi-num">03</div>
+            <div class="bar-poi-info">
+              <h4>INTERAÇÃO COM CIVIS</h4>
+              <div class="bar-poi-loc"><i class="ph ph-map-pin"></i> AV. ATLÂNTICA</div>
+            </div>
+          </div>
+
+          <div class="cod-panel bar-poi-item">
+            <div class="bar-poi-num">04</div>
+            <div class="bar-poi-info">
+              <h4>PRENDAS DA VERGONHA</h4>
+              <div class="bar-poi-loc"><i class="ph ph-map-pin"></i> AV. ATLÂNTICA</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 10px; color: var(--cod-yellow); font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+            <i class="ph ph-navigation-arrow" style="font-size: 1.2rem;"></i>
+            <span>PERCORREREMOS A PÉ.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SCROLL 5: ATAQUE ÀS LINHAS INIMIGAS (DUAS COLUNAS: INFO + IMAGEM) -->
+  <section class="scroll-5-brava" id="scroll-5">
+    <div class="container">
+      <div class="brava-two-cols">
+        
+        <div class="brava-content-box anim-cod">
+          <div class="cod-badge">
+            <i class="ph ph-sparkle"></i> BATALHA FINAL
+          </div>
+          
+          <h2 class="brava-title">
+            ATAQUE ÀS <br><span>LINHAS INIMIGAS</span>
+          </h2>
+          
+          <p class="brava-lead">
+            Às 23h30, o comboio avança em direção ao confronto final. É a batalha decisiva que separa meninos de homens.
+          </p>
+
+          <div class="cod-panel club-cod-card">
+            <div class="club-type-tag">[LOCALIZAÇÃO NÃO INFORMADA]</div>
+            <h4>BUNKER SECRETO</h4>
+            <p>Local estratégico para a tropa surpreender o inimigo.</p>
+          </div>
+
+          <div class="extraction-alert">
+            <i class="ph ph-warning-octagon"></i>
+            <div>
+              <strong>RETORNO COORDENADO:</strong> todo mundo precisa estar seguro, ileso e principalmente VIVO (quem sucumbir prestará contas ao quartel no dia seguinte).
+            </div>
+          </div>
+        </div>
+
+        <div class="anim-cod">
+          <div class="brava-img-box">
+            <img src="https://res.cloudinary.com/dabmzfood/image/upload/v1788703899/IMG_0189_f0bm96.jpg" alt="Invasão e Ataque às Linhas Inimigas">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SCROLL 6: ALISTAMENTO -->
+  <section class="scroll-6-cta" id="scroll-6">
+    <div class="container">
+      <div class="cod-panel cta-cod-box anim-cod">
+        
+        <div class="cod-badge">
+          <i class="ph ph-check-square-offset"></i> RECRUTAMENTO DE EFETIVO
+        </div>
+
+        <h2>AVANTE PELOTÃO!</h2>
+        
+        <p>
+          Confirme sua vaga para dimensionarmos bebida, carne, transporte e reservas antecipadas.
+        </p>
+
+        <a href="https://wa.me/?text=Soldado%20se%20apresentando!%20Confirmando%20presen%C3%A7a%20na%20miss%C3%A3o%20O%20%C3%9Altimo%20Combate!" target="_blank" class="btn-cod-yellow">
+          <i class="ph ph-whatsapp-logo"></i> Alistar-se
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <h4>OPERAÇÃO:<br>O ÚLTIMO COMBATE</h4>
+          <p>
+            A despedida oficial de um nobre soldado.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>DIRETRIZES</h5>
+          <ul>
+            <li><a href="#scroll-1">Convocação</a></li>
+            <li><a href="#scroll-2">Fases de Missão</a></li>
+            <li><a href="#scroll-4">Bares do Fronte</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>SUPORTE</h5>
+          <ul>
+            <li><a href="#scroll-6">Confirmar Presença</a></li>
+            <li><a href="#">Canal no WhatsApp</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 O ÚLTIMO COMBATE. TODOS OS DIREITOS RESERVADOS.</div>
+        <div>BALNEÁRIO CAMBORIÚ & PRAIA BRAVA • SC</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const elements = document.querySelectorAll('.anim-cod');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -30px 0px'
+      });
+
+      elements.forEach(el => observer.observe(el));
+    });
+  </script>
+
+</body>
+</html>
